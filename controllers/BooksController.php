@@ -1,15 +1,15 @@
 <?php
 
-class HomeController
+class BooksController
 {
     /**
      * Affiche la page d'accueil.
      * @return void
      */
-    public function showHome() : void
+    public function showBooks() : void
     {
-        $booksManager = new BooksManager();
-        $books = $booksManager->getAllBooksForHome();
+        $userManager = new UserManager();
+        $users = $userManager->getAllBooks();
 
         $view = new View("Accueil");
         $view->render("home", ['books' => $books]);
