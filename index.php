@@ -16,6 +16,14 @@ try {
             $homeController = new HomeController();
             $homeController->showHome();
             break;
+        case 'register':
+            $registerController = new RegisterController();
+            $registerController->showRegister();
+            break;
+        case 'addNewUser':
+            $registerController = new RegisterController();
+            $registerController->addNewUser();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

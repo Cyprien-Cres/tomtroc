@@ -23,7 +23,7 @@
     <nav role="navigation" aria-label="Main navigation">
         <ul class="nav-left">
             <li>
-                <a href="./index.php?page=home">
+                <a href="./index.php?action=home">
                     <p>Acceuil</p>
                 </a>
             </li>

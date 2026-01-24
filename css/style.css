@@ -376,6 +376,77 @@ main {
 }
 
 
+/* Register page styles */
+
+.register {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+    background-color: var(--backgroundSecondColor);
+}
+
+.register h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+    margin-bottom: 24px;
+}
+
+.register_form {
+    marign-top: 130px;
+    margin-left: 150px;
+    display: flex;
+    flex-direction: column;
+}
+
+.register_form div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.register_form label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--fontSecondColor);
+}
+
+.register_form input {
+    width: 322px;
+    height: 50px;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+}
+
+.register button {
+    width: 322px;
+    height: 63px;
+    background-color: var(--buttonColor);
+    color: var(--backgroundThirdColor);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 40px;
+}
+
+.register .link {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.register .link a {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
 
 /* Footer styles */
 

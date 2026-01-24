@@ -45,7 +45,6 @@ class User extends AbstractEntity
     {
         $this->password = $password;
     }
-
     /**
      * Getter pour le password.
      * @return string
