@@ -24,6 +24,18 @@ try {
             $registerController = new RegisterController();
             $registerController->addNewUser();
             break;
+        case 'login':
+            $loginController = new LoginController();
+            $loginController->showLogin();
+            break;
+        case 'connectUser':
+            $loginController = new LoginController();
+            $loginController->connectUser();
+            break;
+        case 'logout':
+            $loginController = new LoginController();
+            $loginController->logout();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

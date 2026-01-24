@@ -34,24 +34,30 @@
             </li>
         </ul>
         <ul class="nav-right">
-            <li>
-                <a href="./index.php?action=messenger">
-                    <img src="img/header/icon_messenger.svg" class="icon">
-                    <p>Messagerie</p>
-                    <p class="notif_number">1</p>
-                </a>
-            </li>
-            <li>
-                <a href="./index.php?action=account">
-                    <img src="img/header/icon_account.svg" class="icon">
-                    <p>Mon Compte</p>
-                </a>
-            </li>
+            <?php if (isset($_SESSION['user'])): ?>
+                <li>
+                    <a href="./index.php?action=messenger">
+                        <img src="img/header/icon_messenger.svg" class="icon">
+                        <p>Messagerie</p>
+                        <p class="notif_number">1</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="./index.php?action=account">
+                        <img src="img/header/icon_account.svg" class="icon">
+                        <p>Mon Compte</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?action=logout">Déconnexion</a>
+                </li>
+            <?php else: ?>
             <li>
                 <a href="./index.php?action=register">
                     <p>Connexion</p>
                 </a>
             </li>
+            <?php endif; ?>
         </ul>
     </nav>
 </header>

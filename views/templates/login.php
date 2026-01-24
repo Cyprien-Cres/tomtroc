@@ -2,12 +2,8 @@
 
 <section class="register">
     <div class="register_form">
-        <h1>Inscription</h1>
+        <h1>Connexion</h1>
         <form method="post" action="action=books">
-            <div>
-                <label for="nickname">Pseudo</label>
-                <input type="text" id="nickname" name="nickname" required>
-            </div>
             <div>
                 <label for="login">Adresse email</label>
                 <input type="email" id="login" name="login" required>
@@ -17,10 +13,8 @@
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <input type="hidden" name="action" value="addNewUser">
-            <button type="submit">S'inscrire</button>
-
-            <p class="link">Déjà inscrit ? <a href="./index.php?action=login">Connectez-vous</a></p>
+            <input type="hidden" name="action" value="connectUser">
+            <button type="submit">Se connecter</button>
         </form>
     </div>
     <div class="register_img">
