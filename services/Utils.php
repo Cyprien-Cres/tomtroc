@@ -59,5 +59,4 @@ class Utils {
     {
         return $_REQUEST[$variableName] ?? $defaultValue;
     }
-
 }

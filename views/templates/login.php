@@ -1,9 +1,9 @@
 <?php ?>
 
 <section class="register">
-    <div class="register_form">
+    <div class="div_form">
         <h1>Connexion</h1>
-        <form method="post" action="action=books">
+        <form method="post" action="action=home">
             <div>
                 <label for="login">Adresse email</label>
                 <input type="email" id="login" name="login" required>
@@ -14,7 +14,7 @@
             </div>
 
             <input type="hidden" name="action" value="connectUser">
-            <button type="submit">Se connecter</button>
+            <button type="submit" class="button_form">Se connecter</button>
         </form>
     </div>
     <div class="register_img">

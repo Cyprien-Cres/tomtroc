@@ -1,7 +1,7 @@
 <?php ?>
 
 <section class="register">
-    <div class="register_form">
+    <div class="div_form">
         <h1>Inscription</h1>
         <form method="post" action="action=books">
             <div>
@@ -18,7 +18,7 @@
             </div>
 
             <input type="hidden" name="action" value="addNewUser">
-            <button type="submit">S'inscrire</button>
+            <button type="submit" class="button_form">S'inscrire</button>
 
             <p class="link">Déjà inscrit ? <a href="./index.php?action=login">Connectez-vous</a></p>
         </form>

@@ -36,6 +36,10 @@ try {
             $loginController = new LoginController();
             $loginController->logout();
             break;
+        case 'account':
+            $accountController = new AccountController();
+            $accountController->showAccount();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

@@ -34,7 +34,10 @@ class LoginController
 
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
-        $_SESSION['idUser'] = $user->getId();
+        $_SESSION['user_id'] = $user->getId();
+        $_SESSION['login'] = $user->getLogin();
+        $_SESSION['nickname'] = $user->getNickname();
+
 
         // On redirige vers la page home.
         Utils::redirect("home");
