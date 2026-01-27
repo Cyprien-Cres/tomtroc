@@ -395,6 +395,65 @@ main {
     color: var(--fontSecondColor);
 }
 
+/* Books page styles */
+
+.books_page {
+    background-color: var(--backgroundSecondColor);
+    padding-bottom: 80px;
+    padding-top: 90px;
+}
+
+.books_header {
+    display: flex;
+    width: 1140px;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.books_header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+}
+
+.books_header .filter_button {
+    width: 322px;
+    height: 50px;
+    background-color: var(--backgroundThirdColor);
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 39px;
+}
+.search_icon {
+    position: absolute;
+    margin-top: 16px;
+    margin-left: 11px;
+}
+
+
+.books_card_container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    grid-row-gap: 48px;
+    width: 1140px;
+    margin: auto;
+    margin-top: 70px;
+}
+
+.books_card_container .book_card {
+    margin: 0;
+}
+
 
 /* Register page styles */
 
@@ -511,13 +570,54 @@ main {
 .account_info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     background-color: var(--backgroundThirdColor);
     width: 555px;
     height: 508px;
     border-radius: 20px;
 }
+
+.account_info .user_img {
+    height: 135px;
+    width: 135px;
+    border-radius: 100%;
+    margin-top: 46px;
+    margin-bottom: 7px;
+}
+
+.account_info a {
+    margin-bottom: 46px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--fontSecondColor);
+    text-decoration: underline;
+}
+
+.separator {
+    border-bottom: 1px solid var(--backgroundFirstColor);
+    width: 242px;
+    margin-bottom: 46px;
+}
+
+.date_create_account {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: var(--fontSecondColor);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.mini_title {
+    font-size: 8px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.book_number {
+    font-size: 14px;
+    font-weight: 400;
+}
+
 
 .account_form {
     display: flex;
@@ -551,11 +651,6 @@ main {
     font-weight: 600;
     margin-top: 32px;
     margin-bottom: 40px;
-}
-
-.separator {
-    border-bottom: 1px solid #000;
-    width: 242px;
 }
 
 .account_books {

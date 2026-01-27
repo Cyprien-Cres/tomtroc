@@ -7,13 +7,13 @@
     <h1>Mon compte</h1>
     <div class="account_detail">
         <div class="account_info">
-            <img src="img/users/nathalire.png" alt="Icône utilisateur">
+            <img class="user_img" src="img/users/nathalire.png" alt="Icône utilisateur">
             <a>Modifier</a>
             <div class="separator"></div>
             <p><?php echo htmlspecialchars($_SESSION['nickname']);?></p>
-            <p>Membre depuis </p>
-            <p>BIBLIOTHEQUE</p>
-            <p>
+            <p class="date_create_account">Membre depuis </p>
+            <p class="mini_title">BIBLIOTHEQUE</p>
+            <p class="book_number">
                 <img src="img/account/book_logo.svg">
                 <?php echo $count;?>
                 livre<?php echo ($count > 1) ? 's' : ''; ?>

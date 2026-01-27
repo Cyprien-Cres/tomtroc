@@ -28,7 +28,7 @@
                 </a>
             </li>
             <li>
-                <a href="./index.php?page=items">
+                <a href="./index.php?action=books">
                     <p>Nos livres à l'échange</p>
                 </a>
             </li>

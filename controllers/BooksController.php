@@ -8,10 +8,10 @@ class BooksController
      */
     public function showBooks() : void
     {
-        $userManager = new UserManager();
-        $users = $userManager->getAllBooks();
+        $booksManager = new BooksManager();
+        $books = $booksManager->getAllBooks();
 
-        $view = new View("Accueil");
-        $view->render("home", ['books' => $books]);
+        $view = new View("Livres - Tom Troc");
+        $view->render("books", ['books' => $books]);
     }
 }

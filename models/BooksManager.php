@@ -4,6 +4,16 @@
  */
 class BooksManager extends AbstractEntityManager
 {
+    public function getAllBooks() {
+        $sql = "SELECT * FROM books ORDER BY id DESC";
+        $result = $this->db->query($sql);
+        $books = [];
+        while ($row = $result->fetch()) {
+            $books[] = new Books($row);
+        }
+        return $books;
+    }
+
     public function getAllBooksForHome(): array
     {
         $sql = "SELECT books.*, users.nickname as nickname

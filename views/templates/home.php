@@ -11,7 +11,9 @@
                 Donnez une nouvelle vie à vos livres en les échangeant avec d'autres amoureux de la lecture.
                 Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
             </p>
-            <button type="submit">Découvrir</button>
+            <a href="./index.php?action=books">
+                <button type="submit">Découvrir</button>
+            </a>
         </div>
         <div class="img_first_section">
             <img class="men_books" src="img/home/hamza.png" alt="Hommes assis au milieu de livres" />
@@ -33,7 +35,9 @@
                 </article>
             <?php } ?>
         </div>
-        <button type="submit">Voir tous les livres</button>
+        <a href="./index.php?action=books">
+            <button type="submit">Voir tous les livres</button>
+        </a>
     </section>
     <section class="third_section">
         <h2>Comment ça marche ?</h2>

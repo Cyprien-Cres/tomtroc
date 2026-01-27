@@ -10,7 +10,7 @@ class Books extends AbstractEntity
     private string $photo;
     private bool $available;
     private int $user_id;
-    private string $nickname;
+    private string $nickname = '';
 
     public function setTitle(string $title) : void
     {
