@@ -49,7 +49,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?action=logout">Déconnexion</a>
+                    <a href="index.php?action=logout">
+                        <p>Déconnexion</p>
+                    </a>
                 </li>
             <?php else: ?>
             <li>

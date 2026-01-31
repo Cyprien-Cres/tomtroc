@@ -1,7 +1,7 @@
 <?php
 
-require_once 'config/config.php';
 require_once 'config/autoload.php';
+require_once 'config/config.php';
 
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
@@ -19,6 +19,10 @@ try {
         case 'books':
             $booksController = new BooksController();
             $booksController->showBooks();
+            break;
+        case 'detailBook':
+            $booksController = new BooksController();
+            $booksController->showBookDetail();
             break;
         case 'register':
             $registerController = new RegisterController();
@@ -40,9 +44,41 @@ try {
             $loginController = new LoginController();
             $loginController->logout();
             break;
+        case 'publicAccount':
+            $accountController = new AccountController();
+            $accountController->showAccountPublic();
+            break;
         case 'account':
             $accountController = new AccountController();
             $accountController->showAccount();
+            break;
+        case 'updateUser':
+            $accountController = new AccountController();
+            $accountController->updateUser();
+            break;
+        case 'updateUserImg':
+            $accountController = new AccountController();
+            $accountController->updateUserImg();
+            break;
+        case 'edit':
+            $booksController = new BooksController();
+            $booksController->showBook();
+            break;
+        case 'updateBook':
+            $booksController = new BooksController();
+            $booksController->updateBook();
+            break;
+        case 'showAddBook':
+            $booksController = new BooksController();
+            $booksController->showAddBook();
+            break;
+        case 'addBook':
+            $booksController = new BooksController();
+            $booksController->addBook();
+            break;
+        case 'deleteBook':
+            $booksController = new BooksController();
+            $booksController->deleteBook();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");

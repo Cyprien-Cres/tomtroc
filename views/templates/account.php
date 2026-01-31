@@ -7,11 +7,32 @@
     <h1>Mon compte</h1>
     <div class="account_detail">
         <div class="account_info">
-            <img class="user_img" src="img/users/nathalire.png" alt="Icône utilisateur">
-            <a>Modifier</a>
+            <img class="user_img"
+                 src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>"
+                 alt="Icône utilisateur">
+            <form class="account_link" method="post" enctype="multipart/form-data">
+                <label for="fileToUpload">Modifier</label>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            </form>
             <div class="separator"></div>
-            <p><?php echo htmlspecialchars($_SESSION['nickname']);?></p>
-            <p class="date_create_account">Membre depuis </p>
+            <p class="nickname_account"><?php echo htmlspecialchars($_SESSION['user']->getNickname());?></p>
+            <p class="date_create_account">
+                Membre depuis
+                <?php
+                    $dateDay = new DateTime();
+                    $dateCreation = new DateTime($_SESSION['user']->getDate());
+                    $interval = $dateDay->diff($dateCreation);
+                    if ($interval->y > 0) {
+                        echo $interval->y . ' an' . ($interval->y > 1 ? 's' : '');
+                    } elseif ($interval->m > 0) {
+                        echo $interval->m . ' mois';
+                    } elseif ($interval->d > 0) {
+                        echo $interval->d . ' jour' . ($interval->d > 1 ? 's' : '');
+                    } else {
+                        echo 'aujourd\'hui';
+                    }
+                ?>
+            </p>
             <p class="mini_title">BIBLIOTHEQUE</p>
             <p class="book_number">
                 <img src="img/account/book_logo.svg">
@@ -21,10 +42,10 @@
         </div>
         <div class="account_form div_form">
             <h2>Vos informations personnelles</h2>
-            <form method="post" action="action=account">
+            <form method="post">
                 <div>
                     <label for="login">Adresse email</label>
-                    <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['login']);?>" required>
+                    <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['user']->getLogin());?>" required>
                 </div>
                 <div>
                     <label for="password" value="">Mot de passe</label>
@@ -32,9 +53,10 @@
                 </div>
                 <div>
                     <label for="nickname" value="">Pseudo</label>
-                    <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['nickname']);?>" required>
+                    <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['user']->getNickname());?>" required>
                 </div>
-                <input type="hidden" name="action" value="connectUser">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '');?>">
+                <input type="hidden" name="action" value="updateUser"">
                 <button type="submit" class="button_account_form">Enregistrer</button>
             </form>
         </div>
@@ -54,7 +76,7 @@
             <tbody>
             <?php foreach ($books as $book): ?>
                 <tr class="table_row radius_bottom">
-                    <th class="th_img"><img src="img/books/<?php echo htmlspecialchars($book['photo']); ?>.png" alt="Couverture du livre <?php echo $book['title']; ?>"></th>
+                    <th class="th_img"><img src="img/books/<?php echo htmlspecialchars($book['photo']); ?>" alt="Couverture du livre <?php echo $book['title']; ?>"></th>
                     <th class="th_row change_weight"><?php echo htmlspecialchars($book['title']); ?></th>
                     <th class="th_row change_weight"><?php echo htmlspecialchars($book['author']); ?></th>
                     <th class="description_truncate th_row change_weight"><?php echo htmlspecialchars($book['description']); ?></th>
@@ -66,15 +88,11 @@
                         <?php endif; ?>
                     </th>
                     <th class="th_row form_container">
-                        <form action="edition" method="post">
-                            <button class="button_edition">
-                                Éditer
-                            </button>
-                        </form>
-                        <form action="delete" method="post">
-                            <button class="button_delete">
-                                Supprimer
-                            </button>
+                        <a class="a_edition" href="./index.php?action=edit&idBook=<?= htmlspecialchars($book['id'] ?? '');?>">Éditer</a>
+                        <form>
+                            <input type="hidden" name="idBook" value="<?= htmlspecialchars($book['id'] ?? '');?>">
+                            <input type="hidden" name="action" value="delete">
+                            <button class="button_delete" type="submit">Supprimer</button>
                         </form>
                     </th>
                 </tr>
@@ -82,4 +100,9 @@
             </tbody>
         </table>
     </div>
+    <a class="a_add_book" href="./index.php?action=showAddBook">
+        <button class="button_add_book" type="submit">
+            Ajouter un livre
+        </button>
+    </a>
 </section>

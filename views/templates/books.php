@@ -9,15 +9,18 @@
     </div>
     <div class="books_card_container">
         <?php foreach($books as $book) { ?>
-            <article class="book_card">
-                <?php if ($book->getAvailable() === 0): ?>
-                    <p class="not_available">non dispo.</p>
-                <?php endif; ?>
-                <img src="img/books/<?= htmlspecialchars($book->getPhoto()) ?>.png" alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="book_card_img"/>
-                <h3 class="book_card_title"><?= htmlspecialchars($book->getTitle()) ?></h3>
-                <p class="book_card_author"><?= htmlspecialchars($book->getAuthor()) ?></p>
-                <p class="book_card_nickname">Vendu par : <?= htmlspecialchars($book->getNickname()) ?></p>
-            </article>
+            <a class="a_home" href="./index.php?action=detailBook&idBook=<?= htmlspecialchars($book->getId() ?? '');?>">
+                <article class="book_card">
+                    <?php if ($book->getAvailable() === false): ?>
+                        <p class="not_available">non dispo.</p>
+                    <?php endif; ?>
+                    <img src="img/books/<?= htmlspecialchars($book->getPhoto()) ?>"
+                         alt="Couverture du livre <?= htmlspecialchars($book->getTitle()) ?>" class="book_card_img"/>
+                    <h3 class="book_card_title"><?= htmlspecialchars($book->getTitle()) ?></h3>
+                    <p class="book_card_author"><?= htmlspecialchars($book->getAuthor()) ?></p>
+                    <p class="book_card_nickname">Vendu par : <?= htmlspecialchars($book->getNickname()) ?></p>
+                </article>
+            </a>
         <?php } ?>
     </div>
 </section>

@@ -11,10 +11,11 @@ class Books extends AbstractEntity
     private bool $available;
     private int $user_id;
     private string $nickname = '';
+    private string $user_img = '';
 
-    public function setTitle(string $title) : void
+    public function setTitle(?string $title) : void
     {
-        $this->title = $title;
+        $this->title = $title ?? '';
     }
 
     public function getTitle() : string
@@ -22,9 +23,9 @@ class Books extends AbstractEntity
         return $this->title;
     }
 
-    public function setAuthor(string $author) : void
+    public function setAuthor(?string $author) : void
     {
-        $this->author = $author;
+        $this->author = $author ?? '';
     }
 
     public function getAuthor() : string
@@ -32,9 +33,23 @@ class Books extends AbstractEntity
         return $this->author;
     }
 
-    public function setDescription(string $description) : void
+    public function setAvailable(?bool $available) : void
     {
-        $this->description = $description;
+        $this->available = $available ?? true;
+    }
+
+    public function getAvailable() : bool
+    {
+        if ($this->available === true) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function setDescription(?string $description) : void
+    {
+        $this->description = $description ?? '';
     }
 
     public function getDescription() : string
@@ -42,24 +57,14 @@ class Books extends AbstractEntity
         return $this->description;
     }
 
-    public function setPhoto(string $photo) : void
+    public function setPhoto(?string $photo) : void
     {
-        $this->photo = $photo;
+        $this->photo = $photo ?? '';
     }
 
     public function getPhoto() : string
     {
         return $this->photo;
-    }
-
-    public function setAvailable(int $available) : void
-    {
-        $this->available = $available;
-    }
-
-    public function getAvailable() : int
-    {
-        return $this->available;
     }
 
     public function setUserId(int $user_id) : void
@@ -80,5 +85,15 @@ class Books extends AbstractEntity
     public function getNickname() : string
     {
         return $this->nickname;
+    }
+
+    public function setUserImg(string $user_img) : void
+    {
+        $this->user_img = $user_img;
+    }
+
+    public function getUserImg() : string
+    {
+        return $this->user_img;
     }
 }

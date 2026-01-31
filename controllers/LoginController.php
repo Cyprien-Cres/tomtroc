@@ -22,6 +22,7 @@ class LoginController
         // On vérifie que l'utilisateur existe.
         $loginManager = new LoginManager();
         $user = $loginManager->getUserByLogin($login);
+
         if (!$user) {
             throw new Exception("L'utilisateur demandé n'existe pas.");
         }
@@ -34,13 +35,10 @@ class LoginController
 
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
-        $_SESSION['user_id'] = $user->getId();
-        $_SESSION['login'] = $user->getLogin();
-        $_SESSION['nickname'] = $user->getNickname();
 
 
         // On redirige vers la page home.
-        Utils::redirect("home");
+        Utils::redirect("account");
     }
 
     private function checkIfUserIsConnected() : void
@@ -54,7 +52,8 @@ class LoginController
     public function logout() : void
     {
         // On déconnecte l'utilisateur.
-        unset($_SESSION['user']);
+        session_destroy();
+
 
         // On redirige vers la page d'accueil.
         Utils::redirect("home");

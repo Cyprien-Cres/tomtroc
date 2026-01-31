@@ -20,6 +20,10 @@ button {
     cursor: pointer;
 }
 
+a {
+    cursor: pointer;
+}
+
 
 /* Header styles */
 
@@ -27,7 +31,6 @@ header {
     display: flex;
     justify-content: center;
     height: 80px;
-    width: 100%;
     margin: auto;
     background-color: var(--backgroundFirstColor);
 }
@@ -203,6 +206,10 @@ main {
     align-items: center;
     margin-right: 38px;
     margin-top: 80px;
+}
+
+.books_card_container a {
+    text-decoration: none;
 }
 
 .book_card {
@@ -529,6 +536,102 @@ main {
 }
 
 
+/* Detail page styles */
+
+.detail_section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    background-color: var(--backgroundSecondColor);
+}
+
+.title_detail {
+    margin-left: 150px;
+    margin-bottom: 17px;
+    padding-top: 17px;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--fontSecondColor);
+}
+
+.detail_photo img {
+    height: 863px;
+    width: 720px;
+}
+
+.detail_second_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 150px;
+    margin-left: 85px;
+    width: 485px;
+}
+
+.detail_second_section .author {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 34px;
+    margin-top: 18px;
+    color: var(--fontSecondColor);
+}
+
+.detail_line {
+    border-bottom: 1px solid var(--fontSecondColor);
+    width: 27px;
+}
+
+.detail_second_section h2 {
+    font-size: 8px;
+    font-weight: 600;
+    margin-top: 34px;
+}
+
+.detail_second_section textarea {
+    resize: none;
+    outline: none;
+    width: 485px;
+    height: 289px;
+    border: none;
+    background-color: var(--backgroundSecondColor);
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 18px;
+}
+
+.owner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    height: 60px;
+    width: 157px;
+    background-color: var(--backgroundThirdColor);
+    border-radius: 114px;
+    margin-bottom: 80px;
+}
+
+.owner img {
+    height: 48px;
+    width: 48px;
+    border-radius: 100%;
+    margin-right: 12px;
+    margin-left: 6px;
+}
+
+.detail_button {
+    width: 485px;
+    height: 63px;
+    background-color: var(--buttonColor);
+    color: var(--backgroundThirdColor);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 /* Account page styles */
 .account {
     width: 100%;
@@ -545,7 +648,7 @@ main {
     font-weight: 400;
     letter-spacing: 0%;
     line-height: 100%;
-    margin-left: 383px;
+    margin-left: 150px;
     margin-bottom: 40px;
     text-align: left ;
     width: 1140px;
@@ -556,6 +659,12 @@ main {
     font-size: 16px;
     font-weight: 400;
     margin-left: 117px;
+}
+
+.nickname_account {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .account_detail {
@@ -585,12 +694,22 @@ main {
     margin-bottom: 7px;
 }
 
-.account_info a {
+.account_link {
     margin-bottom: 46px;
     font-size: 14px;
     font-weight: 400;
-    color: var(--fontSecondColor);
     text-decoration: underline;
+    color: var(--fontSecondColor);
+}
+
+.account_link input {
+    display: none;
+}
+
+.account_link label {
+    color: var(--fontSecondColor);
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .separator {
@@ -654,7 +773,6 @@ main {
 }
 
 .account_books {
-    height: 579px;
     width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -779,7 +897,9 @@ table .not_available {
     display: flex;
 }
 
-.button_edition {
+.a_edition {
+    font-size: 12px;
+    font-weight: 400;
     margin-right: 28px;
     border: none;
     background-color: var(--backgroundThirdColor);
@@ -787,11 +907,188 @@ table .not_available {
 }
 
 .button_delete {
+    font-size: 12px;
+    font-weight: 400;
     color: #CB2D2D;
     border: none;
     background-color: var(--backgroundThirdColor);
     text-decoration: underline;
 }
+
+.a_add_book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.a_add_book button {
+    width: 208px;
+    height: 63px;
+    background-color: var(--buttonColor);
+    color: var(--backgroundThirdColor);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+
+/* Edition page styles */
+
+.edit_page {
+    background-color: var(--backgroundSecondColor);
+    padding-bottom: 80px;
+    padding-top: 44px;
+    width: 100%;
+    margin: auto;
+}
+
+.edit_link {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    margin-left: 150px;
+    margin-bottom: 25px;
+    color: var(--fontSecondColor);
+}
+
+.edit_link p {
+    margin-left: 3px;
+    margin-bottom: 2px;
+    text-decoration: none;
+    color: var(--fontSecondColor);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.edit_page h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+    width: 1140px;
+    margin-left: 150px;
+    margin-bottom: 40px;
+}
+
+.edit_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1140px;
+    height: 941px;
+    margin: auto;
+    background-color: var(--backgroundThirdColor);
+    border-radius: 20px;
+}
+
+.edit_form h2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    color: var(--fontSecondColor);
+}
+
+.edit_photo {
+    margin-top: 56px;
+    margin-left: 50px;
+}
+
+.edit_photo img {
+    height: 488px;
+    width: 488px;
+    margin-bottom: 25px;
+}
+
+.edit_photo_label {
+    display: flex;
+    justify-content: right;
+    font-size: 12px;
+    font-weight: 400;
+    width: 488px;
+    color: var(--fontFirstColor);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.edit_form .label_form {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: var(--fontSecondColor);
+}
+
+.edit_file {
+    display: none;
+}
+
+.edit_inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 450px;
+    margin-top: 56px;
+    margin-right: 50px;
+}
+
+.edit_inputs input {
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    padding-left: 13px;
+    margin-bottom: 32px;
+    background-color: #EDF2F6;
+}
+
+#description {
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid #F0F0F0;
+    padding-left: 13px;
+    padding-right: 13px;
+    padding-top: 16px;
+    margin-bottom: 32px;
+    background-color: #EDF2F6;
+    height: 356px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.available_input {
+    height: 50px;
+    margin-bottom: 44px;
+    background-color: #EDF2F6;
+    border: none;
+    padding-left: 13px;
+    font-size: 14px;
+    font-weight: 400;
+    appearance: none;
+    background: url('/img/edit/arrow_bottom_icon.svg') no-repeat right 22px center;
+    background-color: #EDF2F6;
+    background-size: 14px;
+}
+
+.edit_inputs button {
+    width: 322px;
+    height: 63px;
+    background-color: var(--buttonColor);
+    color: var(--backgroundThirdColor);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 
 /* Footer styles */
 
