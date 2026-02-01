@@ -96,4 +96,14 @@ class Books extends AbstractEntity
     {
         return $this->user_img;
     }
+
+    public function setDate(string $date) : void
+    {
+        $this->date = $date;
+    }
+
+    public function getDate() : string
+    {
+        return $this->date;
+    }
 }

@@ -611,6 +611,7 @@ main {
     background-color: var(--backgroundThirdColor);
     border-radius: 114px;
     margin-bottom: 80px;
+    text-decoration: none;
 }
 
 .owner img {
@@ -883,12 +884,12 @@ table .not_available {
     font-size: 12px; /* Confirmez la taille de police */
 }
 
-.radius_top {
+thead tr {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
 }
 
-.radius_bottom {
+tbody tr:last-child {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -933,6 +934,53 @@ table .not_available {
     font-weight: 600;
     margin-top: 40px;
 }
+
+
+/* AccountPublic page styles */
+
+.public_account {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 105px;
+}
+
+.public_account .account_detail {
+    justify-content: left;
+}
+
+.public_account .account_info {
+    margin-left: 150px;
+    width: 341px;
+    height: 579px;
+}
+
+.public_account .separator {
+    margin-top: 70px;
+}
+
+.public_account_button {
+    width: 215px;
+}
+
+.table_public_account_books {
+    width: 771px;
+    margin-right: 150px;
+    margin-top: 0px;
+}
+
+.table_public_account_books thead tr {
+    grid-template-columns: 184px 185px 171px 208px;
+    width: 771px;
+}
+
+.table_public_account_books .table_row {
+    grid-template-columns: 184px 185px 171px 208px;
+    width: 771px;
+}
+
 
 
 /* Edition page styles */

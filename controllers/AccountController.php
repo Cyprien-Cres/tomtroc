@@ -24,19 +24,21 @@ class AccountController
 
     public function showAccountPublic() : void
     {
-        $this->checkIfUserIsConnected();
-
-        $id = $book->getUserId();
+        $id = Utils::request("idUser", -1);
 
         $accountManager = new AccountManager();
-        $result = $accountManager->getAllBooksForAccount($id);
+        $resultUser = $accountManager->getUserById($id);
 
-        $books = $result['books'];
+        $accountManager = new AccountManager();
+        $resultBook = $accountManager->getAllBooksForAccount($id);
 
-        $count = $result['count'];
+        $books = $resultBook['books'];
+        $count = $resultBook['count'];
+        $user = $resultUser['user'];
 
         $view = new View("Mon Compte - Tom Troc");
-        $view->render("account", ['books' => $books] + ['count' => $count]);
+        $view->render("publicAccount", ['books' => $books] + ['count' => $count] + ['user' => $user]);
+
     }
 
     private function checkIfUserIsConnected() : void
