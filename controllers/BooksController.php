@@ -8,12 +8,27 @@ class BooksController
      */
     public function showBooks() : void
     {
+        $search = Utils::request('search', '');
+
         $booksManager = new BooksManager();
-        $books = $booksManager->getAllBooks();
+        $allBooks = $booksManager->getAllBooks();
+
+        if (!empty($search)) {
+            $books = array_filter($allBooks, function($book) use ($search) {
+                $titleMatch = stripos($book->getTitle(), $search) !== false;
+                $authorMatch = stripos($book->getAuthor(), $search) !== false;
+                $userMatch = stripos($book->getNickname(), $search) !== false;
+                return $titleMatch || $authorMatch || $userMatch;
+            });
+            $books = array_values($books);
+        } else {
+            $books = $allBooks;
+        }
 
         $view = new View("Livres - Tom Troc");
         $view->render("books", ['books' => $books]);
     }
+
 
     public function showBook() : void
     {
@@ -99,13 +114,6 @@ class BooksController
         // On redirige vers la page d'administration.
         $view = new View("Ajouter un livre");
         $view->render("addBook");
-    }
-
-    public function showDetailBook() : void
-    {
-        // On redirige vers la page d'administration.
-        $view = new View("Ajouter un livre");
-        $view->render("detailBook");
     }
 
     public function addBook() : void
