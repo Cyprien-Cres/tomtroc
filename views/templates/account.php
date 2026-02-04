@@ -6,19 +6,20 @@
 <section class="account">
     <h1>Mon compte</h1>
     <div class="account_detail">
-        <div class="account_info">
-            <img class="user_img"
-                 src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>"
-                 alt="Icône utilisateur">
-            <form class="account_link" method="post" enctype="multipart/form-data">
-                <label for="fileToUpload">Modifier</label>
-                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-            </form>
-            <div class="separator"></div>
-            <p class="nickname_account"><?php echo htmlspecialchars($_SESSION['user']->getNickname());?></p>
-            <p class="date_create_account">
-                Membre depuis
-                <?php
+        <form method="post" enctype="multipart/form-data">
+            <div class="account_info">
+                <img class="user_img"
+                     src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>"
+                     alt="Icône utilisateur">
+                <div class="account_link">
+                    <label for="fileToUpload">Modifier</label>
+                    <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+                </div>
+                <div class="separator"></div>
+                <p class="nickname_account"><?php echo htmlspecialchars($_SESSION['user']->getNickname());?></p>
+                <p class="date_create_account">
+                    Membre depuis
+                    <?php
                     $dateDay = new DateTime();
                     $dateCreation = new DateTime($_SESSION['user']->getDate());
                     $interval = $dateDay->diff($dateCreation);
@@ -31,18 +32,17 @@
                     } else {
                         echo 'aujourd\'hui';
                     }
-                ?>
-            </p>
-            <p class="mini_title">BIBLIOTHEQUE</p>
-            <p class="book_number">
-                <img src="img/account/book_logo.svg">
-                <?php echo $count;?>
-                livre<?php echo ($count > 1) ? 's' : ''; ?>
-            </p>
-        </div>
-        <div class="account_form div_form">
-            <h2>Vos informations personnelles</h2>
-            <form method="post">
+                    ?>
+                </p>
+                <p class="mini_title">BIBLIOTHEQUE</p>
+                <p class="book_number">
+                    <img src="img/account/book_logo.svg">
+                    <?php echo $count ?? 0;?>
+                    livre<?php echo (($count ?? 0) > 1) ? 's' : ''; ?>
+                </p>
+            </div>
+            <div class="account_form div_form">
+                <h2>Vos informations personnelles</h2>
                 <div>
                     <label for="login">Adresse email</label>
                     <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['user']->getLogin());?>" required>
@@ -56,10 +56,10 @@
                     <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['user']->getNickname());?>" required>
                 </div>
                 <input type="hidden" name="id" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '');?>">
-                <input type="hidden" name="action" value="updateUser"">
+                <input type="hidden" name="action" value="updateUser">
                 <button type="submit" class="button_account_form">Enregistrer</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <div class="account_books">
         <table>

@@ -6,11 +6,11 @@
         <form method="post" action="action=home">
             <div>
                 <label for="login">Adresse email</label>
-                <input type="email" id="login" name="login" required>
+                <input type="email" id="login" name="login">
             </div>
             <div>
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password">
             </div>
 
             <input type="hidden" name="action" value="connectUser">

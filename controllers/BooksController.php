@@ -39,25 +39,60 @@ class BooksController
 
     public function updateBook() : void
     {
-
         $id = Utils::request("idBook", -1);
+        $title = Utils::request("title");
         $author = Utils::request("author");
         $description = Utils::request("description");
         $available = Utils::request("available");
+        $newFileName = null;
+
+        // Récupérer l'ancienne photo avant mise à jour
+        $booksManager = new BooksManager();
+        $oldBook = $booksManager->getBookById($id);
+        $oldPhoto = $oldBook->getPhoto();
+
+        if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
+            $targetDir = "img/books/";
+            $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+
+            $newFileName = uniqid() . '.' . $imageFileType;
+            $targetFile = $targetDir . $newFileName;
+
+            $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
+            if ($check !== false) {
+                if ($_FILES['fileToUpload']['size'] <= 9000000) {
+                    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+                        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
+                            // Supprimer l'ancienne photo si elle existe
+                            if ($oldPhoto && file_exists($targetDir . $oldPhoto)) {
+                                unlink($targetDir . $oldPhoto);
+                            }} else {
+                            $newFileName = null;
+                        }
+                    } else {
+                        $newFileName = null;
+                    }
+                } else {
+                    $newFileName = null;
+                }
+            } else {
+                $newFileName = null;
+            }
+        }
 
         $book = new Books([
             'id' => $id,
+            'title' => $title,
             'author' => $author,
             'description' => $description,
-            'available' => $available
+            'available' => $available,
+            'photo' => $newFileName ?? $oldPhoto
         ]);
 
-        $bookManager = new BooksManager();
-        $bookManager->updateBook($book);
-
-        // On redirige vers la page d'administration.
+        $booksManager->updateBook($book);
         Utils::redirect("account");
     }
+
 
     public function showAddBook() : void
     {
@@ -79,21 +114,49 @@ class BooksController
         $author = Utils::request("author");
         $description = Utils::request("description");
         $available = Utils::request("available");
-        $photo = Utils::request("fileToUpload");
+        $uploadedFile = null;
+        $newFileName = null; // Initialisé à null
+
+        if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
+            $targetDir = "img/books/";
+            $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+
+            // Générer le nom UNE SEULE FOIS ici
+            $newFileName = uniqid() . '.' . $imageFileType;
+            $targetFile = $targetDir . $newFileName;
+
+            $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
+            if ($check !== false) {
+                if ($_FILES['fileToUpload']['size'] <= 9000000) {
+                    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+                        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
+                            $uploadedFile = $targetFile;
+                        } else {
+                            $newFileName = null;
+                        }
+                    } else {
+                        $newFileName = null;
+                    }
+                } else {
+                    $newFileName = null;
+                }
+            } else {
+                $newFileName = null;
+            }
+        }
 
         $book = new Books([
             'title' => $title,
             'author' => $author,
             'description' => $description,
             'available' => $available,
-            'photo' => $photo,
+            'photo' => $newFileName,
             'user_id' => $_SESSION['user']->getId()
         ]);
 
         $bookManager = new BooksManager();
         $bookManager->addBook($book);
 
-        // On redirige vers la page d'administration.
         Utils::redirect("account");
     }
 
@@ -101,11 +164,20 @@ class BooksController
     {
         $id = (int)($_GET['idBook'] ?? 0);
 
-        // On supprime l'article.
         $bookManager = new BooksManager();
+
+        // Récupérer la photo avant suppression
+        $book = $bookManager->getBookById($id);
+        $photo = $book->getPhoto();
+
+        // Supprimer le livre de la base
         $bookManager->deleteBook($id);
 
-        // On redirige vers la page d'administration.
+        // Supprimer la photo du dossier si elle existe
+        if ($photo && file_exists("img/books/" . $photo)) {
+            unlink("img/books/" . $photo);
+        }
+
         Utils::redirect("account");
     }
 }

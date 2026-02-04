@@ -51,46 +51,59 @@ class AccountController
 
     public function updateUser() : void
     {
-        $this->checkIfUserIsConnected();
-
-
-        $id = Utils::request("id", -1);
+        $user_id = $_SESSION['user']->getId();
         $login = Utils::request("login");
         $password = Utils::request("password");
         $nickname = Utils::request("nickname");
+        $newFileName = null;
+
+        // Récupérer l'ancienne photo avant mise à jour
+        $accountManager = new AccountManager();
+        $currentUser = $accountManager->getUserById($user_id);
+        $oldPhoto = $currentUser->getUserImg();
+
+        if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
+            $targetDir = "img/users/";
+            $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+
+            $newFileName = uniqid() . '.' . $imageFileType;
+            $targetFile = $targetDir . $newFileName;
+
+            $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
+            if ($check !== false) {
+                if ($_FILES['fileToUpload']['size'] <= 9000000) {
+                    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+                        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
+                            // Supprimer l'ancienne photo si elle existe
+                            if ($oldPhoto && file_exists($targetDir . $oldPhoto)) {
+                                unlink($targetDir . $oldPhoto);
+                            }} else {
+                            $newFileName = null;
+                        }
+                    } else {
+                        $newFileName = null;
+                    }
+                } else {
+                    $newFileName = null;
+                }
+            } else {
+                $newFileName = null;
+            }
+        }
 
         $user = new User([
-            'id' => $id,
+            'id' => $user_id,
             'login' => $login,
             'password' => $password,
-            'nickname' => $nickname
+            'nickname' => $nickname,
+            'user_img' => $newFileName ?? $oldPhoto,
+            'date' => $currentUser->getDate()
         ]);
 
         $userManager = new UserManager();
         $userManager->updateUser($user);
 
-        $_SESSION['login'] = $_POST['login'];
-        $_SESSION['nickname'] = $_POST['nickname'];
-
-        // On redirige vers la page d'administration.
-        Utils::redirect("account");
-    }
-
-    public function updateUserImg() : void {
-        $this->checkIfUserIsConnected();
-
-        if (isset($_FILES['img']) && $_FILES['user_img']['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'books/';
-            $fileName = uniqid() . '_' . basename($_FILES['user_img']['name']);
-            $uploadFile = $uploadDir . $fileName;
-
-            if (move_uploaded_file($_FILES['user_img']['tmp_name'], $uploadFile)) {
-                $accountManager = new AccountManager();
-                $user = $_SESSION['user'];
-                $user->setUserImg($uploadFile); // Supposez un setter pour user_img
-                $accountManager->updateUserImg($user);
-            }
-        }
+        $_SESSION['user'] = $user;
 
         Utils::redirect("account");
     }

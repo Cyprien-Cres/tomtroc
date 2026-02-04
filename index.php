@@ -76,7 +76,7 @@ try {
             $booksController = new BooksController();
             $booksController->addBook();
             break;
-        case 'deleteBook':
+        case 'delete':
             $booksController = new BooksController();
             $booksController->deleteBook();
             break;

@@ -50,11 +50,6 @@ class BooksManager extends AbstractEntityManager
     public function updateBook(Books $book)
     {
         $id = Utils::request("idBook", -1);
-        $title = Utils::request("title");
-        $description = Utils::request("description");
-        $author = Utils::request("author");
-        $available = Utils::request("available");
-        $photo = Utils::request("fileToUpload");
 
         $sql = "UPDATE books 
                 SET title = :title,
@@ -64,33 +59,26 @@ class BooksManager extends AbstractEntityManager
                     photo = :photo
                 WHERE id = :id";
         $this->db->query($sql, [
-            'title' => $title,
-            'author' => $author,
-            'description' => $description,
-            'available' => $available,
-            'photo' => $photo,
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'available' => $book->getAvailable(),
+            'photo' => $book->getPhoto(),
             'id' => $id
         ]);
     }
 
     public function addBook(Books $book)
     {
-        $title = Utils::request("title");
-        $description = Utils::request("description");
-        $author = Utils::request("author");
-        $available = Utils::request("available");
-        $photo = Utils::request("fileToUpload");
-        $user_id = $_SESSION['user']->getId();
-
-        $sql = "INSERT INTO books (title, author, description, available, photo, user_id) 
-                VALUES (:title, :author, :description, :available, :photo, :user_id)";
+        $sql = "INSERT INTO books (title, author, description, available, photo, user_id)
+            VALUES (:title, :author, :description, :available, :photo, :user_id)";
         $this->db->query($sql, [
-            'title' => $title,
-            'author' => $author,
-            'description' => $description,
-            'available' => $available,
-            'photo' => $photo,
-            'user_id' => $user_id
+            'title' => $book->getTitle(),
+            'author' => $book->getAuthor(),
+            'description' => $book->getDescription(),
+            'available' => $book->getAvailable(),
+            'photo' => $book->getPhoto(),
+            'user_id' => $book->getUserId()
         ]);
     }
 

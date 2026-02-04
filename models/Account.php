@@ -8,6 +8,7 @@ class Account extends AbstractEntity
     private string $username;
     private string $login;
     private string $date;
+    private string $user_img;
 
     public function getId(): int
     {
@@ -47,5 +48,15 @@ class Account extends AbstractEntity
     public function setDate(string $date): void
     {
         $this->date = $date;
+    }
+
+    public function setUserImg (string $user_img) : void
+    {
+        $this->user_img = $user_img;
+    }
+
+    public function getUserImg() : string
+    {
+        return $this->user_img;
     }
 }
