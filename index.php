@@ -80,6 +80,14 @@ try {
             $booksController = new BooksController();
             $booksController->deleteBook();
             break;
+        case 'messaging':
+            $messagingController = new MessagingController();
+            $messagingController->showMessaging();
+            break;
+        case 'sendMessage':
+            $messagingController = new MessagingController();
+            $messagingController->sendMessage();
+            break;
         default:
             throw new Exception("La page demandée n'existe pas.");
     }

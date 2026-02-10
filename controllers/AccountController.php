@@ -11,15 +11,11 @@ class AccountController
 
         $id = $_SESSION['user']->getId();
 
-        $accountManager = new AccountManager();
-        $result = $accountManager->getAllBooksForAccount($id);
-
-        $books = $result['books'];
-
-        $count = $result['count'];
+        $booksManager = new BooksManager();
+        $books = $booksManager->getAllBooksForAccount($id);
 
         $view = new View("Mon Compte - Tom Troc");
-        $view->render("account", ['books' => $books] + ['count' => $count]);
+        $view->render("account", ['books' => $books]);
     }
 
     public function showAccountPublic() : void
@@ -27,17 +23,13 @@ class AccountController
         $id = Utils::request("idUser", -1);
 
         $accountManager = new AccountManager();
-        $resultUser = $accountManager->getUserById($id);
+        $user = $accountManager->getUserById($id);
 
-        $accountManager = new AccountManager();
-        $resultBook = $accountManager->getAllBooksForAccount($id);
-
-        $books = $resultBook['books'];
-        $count = $resultBook['count'];
-        $user = $resultUser['user'];
+        $booksManager = new BooksManager();
+        $books = $booksManager->getAllBooksForAccount($id);
 
         $view = new View("Mon Compte - Tom Troc");
-        $view->render("publicAccount", ['books' => $books] + ['count' => $count] + ['user' => $user]);
+        $view->render("publicAccount", ['books' => $books] + ['user' => $user]);
 
     }
 

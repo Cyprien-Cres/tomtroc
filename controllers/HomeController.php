@@ -12,6 +12,6 @@ class HomeController
         $books = $booksManager->getAllBooksForHome();
 
         $view = new View("Accueil - Tom Troc");
-        $view->render("home", ['books' => $books]);
+        $view->render("home", ['books' => $books ]);
     }
 }

@@ -4,14 +4,21 @@
  */
 class Books extends AbstractEntity
 {
+    protected int $id;
     private string $title;
     private string $author;
     private string $description;
     private string $photo;
-    private bool $available;
+    private int $available;
     private int $user_id;
     private string $nickname = '';
     private string $user_img = '';
+    private int $count = 0;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function setTitle(?string $title) : void
     {
@@ -33,18 +40,14 @@ class Books extends AbstractEntity
         return $this->author;
     }
 
-    public function setAvailable(?bool $available) : void
+    public function setAvailable(?int $available) : void
     {
-        $this->available = $available ?? true;
+        $this->available = $available ?? 1;
     }
 
-    public function getAvailable() : bool
+    public function getAvailable() : int
     {
-        if ($this->available === true) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return $this->available;
     }
 
     public function setDescription(?string $description) : void
@@ -105,5 +108,15 @@ class Books extends AbstractEntity
     public function getDate() : string
     {
         return $this->date;
+    }
+
+    public function setCount(int $count) : void
+    {
+        $this->count = $count;
+    }
+
+    public function getCount() : int
+    {
+        return $this->count;
     }
 }

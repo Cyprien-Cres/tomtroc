@@ -37,8 +37,8 @@
                 <p class="mini_title">BIBLIOTHEQUE</p>
                 <p class="book_number">
                     <img src="img/account/book_logo.svg">
-                    <?php echo $count ?? 0;?>
-                    livre<?php echo (($count ?? 0) > 1) ? 's' : ''; ?>
+                    <?php echo count($books) ?? 0;?>
+                    livre<?php echo (count($books) > 1) ? 's' : ''; ?>
                 </p>
             </div>
             <div class="account_form div_form">
@@ -76,21 +76,21 @@
             <tbody>
             <?php foreach ($books as $book): ?>
                 <tr class="table_row radius_bottom">
-                    <th class="th_img"><img src="img/books/<?php echo htmlspecialchars($book['photo']); ?>" alt="Couverture du livre <?php echo $book['title']; ?>"></th>
-                    <th class="th_row change_weight"><?php echo htmlspecialchars($book['title']); ?></th>
-                    <th class="th_row change_weight"><?php echo htmlspecialchars($book['author']); ?></th>
-                    <th class="description_truncate th_row change_weight"><?php echo htmlspecialchars($book['description']); ?></th>
+                    <th class="th_img"><img src="img/books/<?php echo htmlspecialchars($book->getPhoto()); ?>" alt="Couverture du livre <?php echo $book->getTitle(); ?>"></th>
+                    <th class="th_row change_weight"><?php echo htmlspecialchars($book->getTitle()); ?></th>
+                    <th class="th_row change_weight"><?php echo htmlspecialchars($book->getAuthor()); ?></th>
+                    <th class="description_truncate th_row change_weight"><?php echo htmlspecialchars($book->getDescription()); ?></th>
                     <th class="available_container th_row">
-                        <?php if ($book['available'] === 0): ?>
+                        <?php if ($book->getAvailable() === 0): ?>
                             <p class="not_available">non dispo.</p>
                         <?php else: ?>
                             <p class="available">disponible</p>
                         <?php endif; ?>
                     </th>
                     <th class="th_row form_container">
-                        <a class="a_edition" href="./index.php?action=edit&idBook=<?= htmlspecialchars($book['id'] ?? '');?>">Éditer</a>
+                        <a class="a_edition" href="./index.php?action=edit&idBook=<?= htmlspecialchars($book->getId() ?? '');?>">Éditer</a>
                         <form>
-                            <input type="hidden" name="idBook" value="<?= htmlspecialchars($book['id'] ?? '');?>">
+                            <input type="hidden" name="idBook" value="<?= htmlspecialchars($book->getId() ?? '');?>">
                             <input type="hidden" name="action" value="delete">
                             <button class="button_delete" type="submit">Supprimer</button>
                         </form>
@@ -106,3 +106,18 @@
         </button>
     </a>
 </section>
+
+<script>
+    document.getElementById('fileToUpload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const userImg = document.querySelector('.user_img');
+
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                userImg.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

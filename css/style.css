@@ -95,6 +95,7 @@ header nav ul li a p {
     min-width: 8.5px;
     padding-right: 2px;
     padding-left: 2px;
+    padding-bottom: 2px;
     border-radius: 6.75px;
     background-color: var(--fontFirstColor);
     color: var(--backgroundFirstColor);
@@ -103,6 +104,9 @@ header nav ul li a p {
     margin-left: 4px;
 }
 
+.all_read {
+    display: none;
+}
 
 /* Main styles */
 
@@ -658,7 +662,6 @@ main {
     margin-left: 150px;
     margin-bottom: 40px;
     text-align: left ;
-    width: 1140px;
 }
 
 .account h2 {
@@ -945,7 +948,7 @@ tbody tr:last-child {
 .public_account {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-top: 80px;
     padding-bottom: 105px;
@@ -973,6 +976,7 @@ tbody tr:last-child {
     width: 771px;
     margin-right: 150px;
     margin-top: 0px;
+    margin-left: 30px;
 }
 
 .table_public_account_books thead tr {
@@ -1141,6 +1145,231 @@ tbody tr:last-child {
     font-size: 16px;
     font-weight: 600;
 }
+
+/* Add book page styles */
+
+.edit_photo img {
+    background-color: #EDF2F6;
+}
+
+/* Messaging page styles */
+
+.messaging {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    height: 893px;
+    background-color: var(--backgroundFirstColor);
+    padding-bottom: 80px;
+    padding-top: 80px;
+}
+
+.messaging h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+    margin-left: 34px;
+    margin-bottom: 27px;
+}
+
+.conversations_list {
+    width: 308px;
+    height: 893px;
+    background-color: var(--backgroundSecondColor);
+    padding-top: 55px;
+}
+
+.conversations_list .active {
+    background-color: var(--backgroundThirdColor);
+}
+
+.conversation_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    text-decoration: none;
+}
+
+.conversation_details {
+    width: 172px;
+}
+
+
+.conversation_item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 12px;
+    margin-left: 34px;}
+
+.conversation_info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.conversation_info p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.conversation_info_nickname {
+    margin-bottom: 7px;
+}
+
+.conversation_last_message {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--fontSecondColor);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    line-height: 1.2;
+}
+
+.conversation {
+    width: 832px;
+    height: 893px;
+    padding-left: 45px;
+}
+
+.user_sender {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.user_sender img {
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.conversation_messages {
+    margin-bottom: 73px;
+    height: 592px;
+    padding-top: 73px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.sent {
+    align-self: flex-end;
+    max-width: 70%;
+}
+
+.received {
+    align-self: flex-start;
+    max-width: 70%;
+}
+
+.received_details {
+    margin-top: 8px;
+}
+
+.sent img {
+    display: none;
+}
+
+.sent .received_details p {
+    width: 100%;
+}
+
+.sent .message_bubble {
+    border-radius: 3px;
+    background-color: #EDF2F6;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.received_details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.received_details p {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--fontSecondColor);
+    text-align: right;
+}
+
+.received img {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-right: 6px;
+}
+
+.received .message_bubble {
+    border-radius: 3px;
+    background-color: var(--backgroundThirdColor);
+    height: 37px;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.conversation form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 98px;
+    width: 100%;
+}
+
+.conversation textarea {
+    width: 628px;
+    height: 49px;
+    resize: none;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    padding-left: 41px;
+    padding-right: 41px;
+    padding-top: 15px;
+}
+
+.conversation button {
+    width: 132px;
+    height: 49px;
+    background-color: var(--buttonColor);
+    color: var(--backgroundThirdColor);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 21px;
+}
+
 
 
 /* Footer styles */

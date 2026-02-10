@@ -36,7 +36,6 @@ class LoginController
         // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
 
-
         // On redirige vers la page home.
         Utils::redirect("account");
     }

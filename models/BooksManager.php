@@ -47,6 +47,17 @@ class BooksManager extends AbstractEntityManager
         return $book;
     }
 
+    public function getAllBooksForAccount(int $user_id): array
+    {
+        $sql = "SELECT books.* FROM books WHERE books.user_id = :user_id";
+        $result = $this->db->query($sql, ['user_id' => $user_id]);
+        $books = [];
+        while ($row = $result->fetch()) {
+            $books[] = new Books($row);
+        }
+        return $books;
+    }
+
     public function updateBook(Books $book)
     {
         $id = Utils::request("idBook", -1);

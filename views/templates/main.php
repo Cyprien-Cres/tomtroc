@@ -36,10 +36,10 @@
         <ul class="nav-right">
             <?php if (isset($_SESSION['user'])): ?>
                 <li>
-                    <a href="./index.php?action=messenger">
+                    <a href="./index.php?action=messaging&userRecipient=<?= isset($_SESSION['lastConversationUserId']) ? '&userRecipient=' . $_SESSION['lastConversationUserId'] : '' ?>">
                         <img src="img/header/icon_messenger.svg" class="icon">
                         <p>Messagerie</p>
-                        <p class="notif_number">1</p>
+                        <p class="<?php echo (isset($_SESSION['unreadCounter']) && $_SESSION['unreadCounter'] > 0) ? 'notif_number' : 'all_read'?>"><?php echo $_SESSION['unreadCounter']?></p>
                     </a>
                 </li>
                 <li>
