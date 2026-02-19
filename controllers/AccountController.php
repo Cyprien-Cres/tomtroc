@@ -28,7 +28,9 @@ class AccountController
         $booksManager = new BooksManager();
         $books = $booksManager->getAllBooksForAccount($id);
 
-        $view = new View("Mon Compte - Tom Troc");
+        $nickname = $user->getNickname();
+
+        $view = new View("Compte $nickname - Tom Troc");
         $view->render("publicAccount", ['books' => $books] + ['user' => $user]);
 
     }

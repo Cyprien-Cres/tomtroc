@@ -48,11 +48,11 @@
                     <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['user']->getLogin());?>" required>
                 </div>
                 <div>
-                    <label for="password" value="">Mot de passe</label>
+                    <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" value="password" required>
                 </div>
                 <div>
-                    <label for="nickname" value="">Pseudo</label>
+                    <label for="nickname">Pseudo</label>
                     <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['user']->getNickname());?>" required>
                 </div>
                 <input type="hidden" name="id" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '');?>">
@@ -101,9 +101,7 @@
         </table>
     </div>
     <a class="a_add_book" href="./index.php?action=showAddBook">
-        <button class="button_add_book" type="submit">
-            Ajouter un livre
-        </button>
+        Ajouter un livre
     </a>
 </section>
 

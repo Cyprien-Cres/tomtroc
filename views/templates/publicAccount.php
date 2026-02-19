@@ -35,8 +35,9 @@
                 livre<?php echo (count($books) > 1) ? 's' : ''; ?>
             </p>
             <a role="link" aria-label="Lien vers la page de connection ou la messagerie"
+               class="button_account_form public_account_button"
                href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">
-                <button type="submit" class="button_account_form public_account_button">Écrire un message</button>
+                Écrire un message
             </a>
         </div>
     </div>

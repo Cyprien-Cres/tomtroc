@@ -4,7 +4,7 @@ class LoginController
 {
     public function showLogin() : void
     {
-        $view = new View("Login - Tom Troc");
+        $view = new View("Connexion - Tom Troc");
         $view->render("login");
     }
 

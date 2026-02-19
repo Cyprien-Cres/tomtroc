@@ -12,7 +12,7 @@
                 Nous croyons en la magie du partage de connaissances et d'histoires à travers les livres.
             </p>
             <a role="link" aria-label="Button vers page Livres à l'échange" href="./index.php?action=books">
-                <button type="submit">Découvrir</button>
+                Découvrir
             </a>
         </div>
         <div class="img_first_section">
@@ -39,7 +39,7 @@
             <?php } ?>
         </div>
         <a class="button_link" href="./index.php?action=books">
-            <button type="submit">Voir tous les livres</button>
+            Voir tous les livres
         </a>
     </section>
     <section class="third_section">
@@ -60,7 +60,7 @@
             </div>
         </div>
         <a href="./index.php?action=books">
-            <button type="submit">Voir tous les livres</button>
+            Voir tous les livres
         </a>
     </section>
     <section class="fourth_section">

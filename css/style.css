@@ -46,7 +46,7 @@ header .logo {
     width: 155px;
     height: 51px;
     margin-left: 150px;
-    margin-right: 50px;
+    margin-right: 33px;
     margin-top: 15px;
 }
 
@@ -54,7 +54,7 @@ header nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 31px;
+    margin-top: 33px;
     width: 100%;
 }
 
@@ -187,7 +187,11 @@ main {
     margin-bottom: 16px;
 }
 
-.text_first_section button {
+.text_first_section a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     width: 152px;
     height: 63px;
     background-color: var(--buttonColor);
@@ -331,7 +335,11 @@ main {
     background-color: var(--backgroundSecondColor);
 }
 
-.second_section button {
+.second_section .button_link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     width: 208px;
     height: 63px;
     background-color: var(--buttonColor);
@@ -398,7 +406,11 @@ main {
     background-color: var(--backgroundThirdColor);
 }
 
-.third_section button {
+.third_section a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
     width: 208px;
     height: 63px;
     background-color: var(--backgroundFirstColor);
@@ -657,6 +669,10 @@ main {
 }
 
 .detail_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     width: 485px;
     height: 63px;
     background-color: var(--buttonColor);
@@ -1093,20 +1109,15 @@ tbody tr:last-child {
     text-decoration: none;
     width: 208px;
     height: 63px;
-    margin-top: 40px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.a_add_book button {
-    width: 208px;
-    height: 63px;
     background-color: var(--buttonColor);
     color: var(--backgroundThirdColor);
     border: none;
     border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
@@ -1133,7 +1144,7 @@ tbody tr:last-child {
 }
 
 .public_account .account_info .user_img {
-    height: 181px;
+    height: 135px;
     width: 135px;
     object-fit: cover;
     margin-bottom: 0px;
@@ -1157,12 +1168,12 @@ tbody tr:last-child {
     margin-bottom: 12px;
 }
 
-.public_account .account_info a {
-    background-color: var(--backgroundThirdColor);
-}
-
 
 .public_account_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     width: 215px;
     margin-bottom: 56px;
     background-color: var(--backgroundFirstColor);
