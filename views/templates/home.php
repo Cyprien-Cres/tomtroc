@@ -38,7 +38,7 @@
             </a>
             <?php } ?>
         </div>
-        <a href="./index.php?action=books">
+        <a class="button_link" href="./index.php?action=books">
             <button type="submit">Voir tous les livres</button>
         </a>
     </section>

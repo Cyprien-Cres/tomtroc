@@ -24,12 +24,12 @@
         <ul class="nav-left">
             <li>
                 <a href="./index.php?action=home">
-                    <p>Acceuil</p>
+                    <p class="<?= (!isset($_GET['action']) || $_GET['action'] === 'home') ? 'active' : '' ?>">Accueil</p>
                 </a>
             </li>
             <li>
                 <a href="./index.php?action=books">
-                    <p>Nos livres à l'échange</p>
+                    <p class="<?= isset($_GET['action']) && $_GET['action'] === 'books' ? 'active' : '' ?>">Nos livres à l'échange</p>
                 </a>
             </li>
         </ul>
@@ -37,15 +37,19 @@
             <?php if (isset($_SESSION['user'])): ?>
                 <li>
                     <a href="./index.php?action=messaging&userRecipient=<?= isset($_SESSION['lastConversationUserId']) ? '&userRecipient=' . $_SESSION['lastConversationUserId'] : '' ?>">
+                        <?php if ($_GET['action'] === 'messaging'): ?>
+                        <img src="img/header/icon_messenger_bold.svg" class="icon">
+                        <?php else: ?>
                         <img src="img/header/icon_messenger.svg" class="icon">
-                        <p>Messagerie</p>
+                        <?php endif; ?>
+                        <p class="<?= $_GET['action'] === 'messaging' ? 'active' : '' ?>">Messagerie</p>
                         <p class="<?php echo (isset($_SESSION['unreadCounter']) && $_SESSION['unreadCounter'] > 0) ? 'notif_number' : 'all_read'?>"><?php echo $_SESSION['unreadCounter']?></p>
                     </a>
                 </li>
                 <li>
                     <a href="./index.php?action=account">
                         <img src="img/header/icon_account.svg" class="icon">
-                        <p>Mon Compte</p>
+                        <p class="<?= $_GET['action'] === 'account' ? 'active' : '' ?>">Mon Compte</p>
                     </a>
                 </li>
                 <li>
@@ -56,7 +60,8 @@
             <?php else: ?>
             <li>
                 <a href="./index.php?action=register">
-                    <p>Connexion</p>
+                    <p class="<?= isset($_GET['action']) && $_GET['action'] === 'register'
+                    || isset($_GET['action']) && $_GET['action'] === 'login' ? 'active' : '' ?>">Connexion</p>
                 </a>
             </li>
             <?php endif; ?>

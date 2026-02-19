@@ -1,10 +1,11 @@
 
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
     color: var(--fontFirstColor);
     font-family: 'Inter', sans-serif;
+    background-color: var(--backgroundFirstColor);
 }
 
 :root {
@@ -32,10 +33,11 @@ input:required {
 /* Header styles */
 
 header {
+    margin: 0 auto;
+    max-width: 1440px;
     display: flex;
     justify-content: center;
     height: 80px;
-    margin: auto;
     background-color: var(--backgroundFirstColor);
 }
 
@@ -59,7 +61,14 @@ header nav {
 header nav ul {
     display: flex;
     flex-direction: row;
+    margin-top: 0px;
 }
+
+header nav ul .active {
+    font-weight: 600;
+}
+
+
 
 .nav-right {
     margin-right: 150px;
@@ -80,10 +89,14 @@ header nav ul li a {
 }
 header nav ul li a p {
     padding-top: 2px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    letter-spacing: 2%;
 }
 
 .icon {
     stroke-width: 0.71px;
+    margin-top: 3px;
     margin-right: 4px;
 }
 
@@ -114,6 +127,32 @@ main {
     width: 100%;
     margin: auto;
     background-color: var(--backgroundFirstColor);
+}
+
+/* Error page styles */
+
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+    background-color: var(--backgroundFirstColor);
+}
+
+.error h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 58px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+    margin-bottom: 40px;
+}
+
+.error p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 40px;
 }
 
 
@@ -205,6 +244,7 @@ main {
     letter-spacing: 0%;
     line-height: 100%;
     margin-top: 80px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .books_card_container {
@@ -255,6 +295,12 @@ main {
     font-weight: 400;
     margin-top: 20px;
     margin-left: 14px;
+    background-color: var(--backgroundThirdColor);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1; /* nombre de lignes max */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .book_card_author {
@@ -263,6 +309,7 @@ main {
     margin-top: 8px;
     margin-left: 14px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundThirdColor);
 }
 
 .book_card_nickname {
@@ -272,6 +319,18 @@ main {
     margin-top:22px;
     margin-left: 14px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundThirdColor);
+}
+
+.a_home {
+    background-color: var(--backgroundSecondColor);
+}
+
+.second_section .button_link {
+    height: 63px;
+    margin-top: 48px;
+    margin-bottom: 65px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .second_section button {
@@ -283,8 +342,6 @@ main {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
-    margin-top: 48px;
-    margin-bottom: 65px;
 }
 
 
@@ -340,6 +397,7 @@ main {
     font-size: 14px;
     font-weight: 400;
     width: 180px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .third_section button {
@@ -421,11 +479,12 @@ main {
 
 .books_header {
     display: flex;
-    width: 1140px;
+    width: 914px;
     margin: auto;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    background-color: var(--backgroundSecondColor);
 }
 
 .books_header h1 {
@@ -434,6 +493,7 @@ main {
     font-weight: 400;
     letter-spacing: 0%;
     line-height: 100%;
+    background-color: var(--backgroundSecondColor);
 }
 
 .books_header .filter_button {
@@ -453,17 +513,18 @@ main {
     position: absolute;
     margin-top: 16px;
     margin-left: 11px;
+    background-color: var(--backgroundThirdColor);
 }
-
-
 .books_card_container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 38px;
     justify-items: center;
     grid-row-gap: 48px;
-    width: 1140px;
+    width: 914px;
     margin: auto;
     margin-top: 70px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .books_card_container .book_card {
@@ -473,11 +534,15 @@ main {
 
 /* Register page styles */
 
+.register_container {
+    background-color: var(--backgroundSecondColor);
+}
+
 .register {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 1440px;
     margin: auto;
     background-color: var(--backgroundSecondColor);
 }
@@ -489,6 +554,7 @@ main {
     letter-spacing: 0%;
     line-height: 100%;
     margin-bottom: 24px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .div_form {
@@ -496,12 +562,18 @@ main {
     margin-left: 150px;
     display: flex;
     flex-direction: column;
+    background-color: var(--backgroundSecondColor);
 }
 
 .div_form div {
     display: flex;
     flex-direction: column;
     margin-top: 32px;
+    background-color: var(--backgroundSecondColor);
+}
+
+.div_form form {
+    background-color: var(--backgroundSecondColor);
 }
 
 .div_form label {
@@ -509,6 +581,7 @@ main {
     font-weight: 400;
     margin-bottom: 10px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundSecondColor);
 }
 
 .div_form input {
@@ -519,6 +592,7 @@ main {
     font-size: 14px;
     font-weight: 400;
     padding-left: 5px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .button_form {
@@ -537,15 +611,26 @@ main {
 .register .link {
     font-size: 14px;
     font-weight: 400;
+    background-color: var(--backgroundSecondColor);
 }
 
 .register .link a {
     font-size: 14px;
     font-weight: 400;
+    background-color: var(--backgroundSecondColor);
+}
+
+.register_img {
+    height: 886px;
 }
 
 
+
 /* Detail page styles */
+
+.detail_page {
+    background-color: var(--backgroundSecondColor);
+}
 
 .detail_section {
     display: flex;
@@ -553,15 +638,20 @@ main {
     align-items: center;
     margin: auto;
     background-color: var(--backgroundSecondColor);
+    width: 1440px;
 }
 
 .title_detail {
-    margin-left: 150px;
-    margin-bottom: 17px;
+    padding-left: 383px;
+    margin-top: 0px;
+    padding-bottom: 17px;
     padding-top: 17px;
     font-size: 12px;
     font-weight: 300;
     color: var(--fontSecondColor);
+}
+.detail_photo {
+    height: 863px;
 }
 
 .detail_photo img {
@@ -576,6 +666,18 @@ main {
     margin-right: 150px;
     margin-left: 85px;
     width: 485px;
+    background-color: var(--backgroundSecondColor);
+}
+
+.detail_second_section h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0%;
+    line-height: 100%;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .detail_second_section .author {
@@ -584,17 +686,20 @@ main {
     margin-bottom: 34px;
     margin-top: 18px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundSecondColor);
 }
 
 .detail_line {
     border-bottom: 1px solid var(--fontSecondColor);
     width: 27px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .detail_second_section h2 {
     font-size: 8px;
     font-weight: 600;
     margin-top: 34px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .detail_second_section textarea {
@@ -632,6 +737,10 @@ main {
     object-fit: cover;
 }
 
+.owner p {
+    background-color: var(--backgroundThirdColor);
+}
+
 .detail_button {
     width: 485px;
     height: 63px;
@@ -659,21 +768,22 @@ main {
     font-weight: 400;
     letter-spacing: 0%;
     line-height: 100%;
-    margin-left: 150px;
+    margin: auto;
+    width: 1140px;
     margin-bottom: 40px;
     text-align: left ;
+    background-color: var(--backgroundSecondColor);
 }
 
 .account h2 {
     margin-top: 36px;
     font-size: 16px;
     font-weight: 400;
+    background-color: var(--backgroundSecondColor);
 }
 
-.nickname_account {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 400;
+.account_detail {
+    background-color: var(--backgroundSecondColor);
 }
 
 .account_detail form {
@@ -683,6 +793,7 @@ main {
     align-items: center;
     margin: auto;
     width: 1140px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .account_info {
@@ -710,6 +821,7 @@ main {
     font-weight: 400;
     text-decoration: underline;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundThirdColor);
 }
 
 .account_link input {
@@ -720,6 +832,7 @@ main {
     color: var(--fontSecondColor);
     cursor: pointer;
     text-decoration: none;
+    background-color: var(--backgroundThirdColor);
 }
 
 .separator {
@@ -728,23 +841,37 @@ main {
     margin-bottom: 46px;
 }
 
+.nickname_account {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: var(--backgroundThirdColor);
+}
+
 .date_create_account {
     margin-top: 15px;
     margin-bottom: 15px;
     color: var(--fontSecondColor);
     font-size: 14px;
     font-weight: 400;
+    background-color: var(--backgroundThirdColor);
 }
 
 .mini_title {
     font-size: 8px;
     font-weight: 600;
     margin-bottom: 8px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .book_number {
     font-size: 14px;
     font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 93px;
+    background-color: var(--backgroundThirdColor);
 }
 
 
@@ -758,6 +885,18 @@ main {
     border-radius: 20px;
     margin-left: 35px;
     padding-left: 117px;
+}
+
+.account_form h2 {
+    background-color: var(--backgroundThirdColor);
+}
+
+.account_form div {
+    background-color: var(--backgroundThirdColor);
+}
+
+.account_form label {
+    background-color: var(--backgroundThirdColor);
 }
 
 .account_form input {
@@ -785,12 +924,18 @@ main {
     margin-right: auto;
 }
 
+
 table {
     height: 100%;
     width: 1140px;
     font-size: 12px;
     font-weight: 400;
     margin-top: 35px;
+    background-color: var(--backgroundSecondColor);
+}
+
+thead {
+    background-color: var(--backgroundSecondColor);
 }
 
 thead tr {
@@ -811,6 +956,7 @@ thead th {
 tbody {
     width: 1140px;
     margin-bottom: 80px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .table_row:nth-child(odd) {
@@ -834,6 +980,7 @@ tbody {
 td {
     text-align: center;
     width: 100px;
+    background-color: transparent;
 }
 
 table img {
@@ -844,10 +991,12 @@ table img {
 
 .th_img {
     margin-left: 66px;
+    background-color: transparent;
 }
 
 .th_row {
     margin-left: 40px;
+    background-color: transparent;
 }
 
 .change_weight {
@@ -905,12 +1054,17 @@ tbody tr:last-child {
     display: flex;
 }
 
+.form_container form {
+    background-color: transparent;
+}
+
+
 .a_edition {
     font-size: 12px;
     font-weight: 400;
     margin-right: 28px;
     border: none;
-    background-color: var(--backgroundThirdColor);
+    background-color: transparent;
     text-decoration: underline;
 }
 
@@ -919,7 +1073,7 @@ tbody tr:last-child {
     font-weight: 400;
     color: #CB2D2D;
     border: none;
-    background-color: var(--backgroundThirdColor);
+    background-color: transparent;
     text-decoration: underline;
 }
 
@@ -928,6 +1082,11 @@ tbody tr:last-child {
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    width: 208px;
+    height: 63px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .a_add_book button {
@@ -939,7 +1098,6 @@ tbody tr:last-child {
     border-radius: 10px;
     font-size: 16px;
     font-weight: 600;
-    margin-top: 40px;
 }
 
 
@@ -951,7 +1109,8 @@ tbody tr:last-child {
     justify-content: center;
     align-items: center;
     padding-top: 80px;
-    padding-bottom: 105px;
+    padding-bottom: 212px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .public_account .account_detail {
@@ -964,12 +1123,44 @@ tbody tr:last-child {
     height: 579px;
 }
 
+.public_account .account_info .user_img {
+    height: 181px;
+    width: 135px;
+    object-fit: cover;
+    margin-bottom: 0px;
+}
+
 .public_account .separator {
     margin-top: 70px;
 }
 
+.public_account .nickname_account {
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
+.public_account .mini_title {
+    margin-bottom: 8px;
+}
+
+.public_account .book_number {
+    margin-top: 0px;
+    margin-bottom: 12px;
+}
+
+.public_account .account_info a {
+    background-color: var(--backgroundThirdColor);
+}
+
+
 .public_account_button {
     width: 215px;
+    margin-bottom: 56px;
+    background-color: var(--backgroundFirstColor);
+}
+
+.public_account_books {
+    background-color: var(--backgroundSecondColor);
 }
 
 .table_public_account_books {
@@ -977,6 +1168,7 @@ tbody tr:last-child {
     margin-right: 150px;
     margin-top: 0px;
     margin-left: 30px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .table_public_account_books thead tr {
@@ -1010,6 +1202,10 @@ tbody tr:last-child {
     margin-left: 150px;
     margin-bottom: 25px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundSecondColor);
+}
+.edit_link img {
+    background-color: var(--backgroundSecondColor);
 }
 
 .edit_link p {
@@ -1019,6 +1215,8 @@ tbody tr:last-child {
     color: var(--fontSecondColor);
     font-size: 14px;
     font-weight: 400;
+    margin-top: 0px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .edit_page h1 {
@@ -1030,6 +1228,7 @@ tbody tr:last-child {
     width: 1140px;
     margin-left: 150px;
     margin-bottom: 40px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .edit_form {
@@ -1048,11 +1247,13 @@ tbody tr:last-child {
     font-weight: 400;
     margin-bottom: 12px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundThirdColor);
 }
 
 .edit_photo {
     margin-top: 56px;
     margin-left: 50px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .edit_photo img {
@@ -1071,6 +1272,7 @@ tbody tr:last-child {
     color: var(--fontFirstColor);
     text-decoration: underline;
     cursor: pointer;
+    background-color: var(--backgroundThirdColor);
 }
 
 .edit_form .label_form {
@@ -1078,6 +1280,7 @@ tbody tr:last-child {
     font-weight: 400;
     margin-bottom: 10px;
     color: var(--fontSecondColor);
+    background-color: var(--backgroundThirdColor);
 }
 
 .edit_file {
@@ -1091,6 +1294,7 @@ tbody tr:last-child {
     width: 450px;
     margin-top: 56px;
     margin-right: 50px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .edit_inputs input {
@@ -1107,18 +1311,19 @@ tbody tr:last-child {
 
 #description {
     width: 100%;
-    height: 50px;
+    height: 356px;
     font-size: 14px;
     font-weight: 400;
     border: 1px solid #F0F0F0;
+    border-radius: 6px;
     padding-left: 13px;
     padding-right: 13px;
     padding-top: 16px;
     margin-bottom: 32px;
     background-color: #EDF2F6;
-    height: 356px;
     overflow-y: auto;
     box-sizing: border-box;
+    resize: none;
 }
 
 .available_input {
@@ -1174,6 +1379,7 @@ tbody tr:last-child {
     line-height: 100%;
     margin-left: 34px;
     margin-bottom: 27px;
+    background-color: var(--backgroundSecondColor);
 }
 
 .conversations_list {
@@ -1192,13 +1398,18 @@ tbody tr:last-child {
     flex-direction: row;
     align-items: center;
     width: 100%;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     text-decoration: none;
+    background-color: var(--backgroundSecondColor);
+
 }
 
 .conversation_details {
     width: 172px;
+    margin-bottom: 21px;
+    margin-top: 21px;
+    background-color: transparent;
 }
 
 
@@ -1208,21 +1419,25 @@ tbody tr:last-child {
     border-radius: 100%;
     object-fit: cover;
     margin-right: 12px;
-    margin-left: 34px;}
+    margin-left: 34px;
+}
 
 .conversation_info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: transparent;
 }
 
 .conversation_info p {
     font-size: 14px;
     font-weight: 400;
+    margin-bottom: 8px;
+    background-color: transparent;
 }
 
 .conversation_info_nickname {
-    margin-bottom: 7px;
+    background-color: transparent;
 }
 
 .conversation_last_message {
@@ -1236,7 +1451,10 @@ tbody tr:last-child {
     text-overflow: ellipsis;
     word-break: break-word;
     line-height: 1.2;
+    margin-top: 0px;
+    background-color: transparent;
 }
+
 
 .conversation {
     width: 832px;
@@ -1302,6 +1520,10 @@ tbody tr:last-child {
     font-weight: 400;
 }
 
+.message_bubble p {
+    background-color: transparent;
+}
+
 .received_details {
     display: flex;
     flex-direction: row;
@@ -1356,6 +1578,7 @@ tbody tr:last-child {
     padding-left: 41px;
     padding-right: 41px;
     padding-top: 15px;
+    background-color: var(--backgroundThirdColor);
 }
 
 .conversation button {
@@ -1382,14 +1605,18 @@ footer {
     width: 100%;
     font-size: 12px;
     font-weight: 300;
-    max-width: 1440px;
     margin: auto;
     background-color: var(--backgroundThirdColor);
 }
 
 footer nav {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    align-items: end;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: var(--backgroundThirdColor);
 }
 
 footer nav ul {
