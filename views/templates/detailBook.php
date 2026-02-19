@@ -8,8 +8,8 @@
             <h1><?php echo htmlspecialchars($book->getTitle());?></h1>
             <p class="author">par <?php echo htmlspecialchars($book->getAuthor());?></p>
             <div class="detail_line"></div>
-            <h2>DESCRIPTION</h2>
-            <textarea readonly class="description_book"><?php echo htmlspecialchars($book->getDescription());?></textarea>
+            <label for="description_book">DESCRIPTION</label>
+            <textarea readonly id="description_book" class="description_book"><?php echo htmlspecialchars($book->getDescription());?></textarea>
             <a class="owner" href="./index.php?action=publicAccount&idUser=<?php echo htmlspecialchars($book->getUserId());?>">
                 <img src="img/users/<?php echo htmlspecialchars($book->getUserImg());?>" alt="Photo de l'utilisateur">
                 <p><?php echo htmlspecialchars($book->getNickname());?></p>

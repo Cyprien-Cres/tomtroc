@@ -2,7 +2,7 @@
 
 <section class="register_container">
     <div class="register">
-        <div class="div_form">
+        <div class="div_form" role="form" aria-label="Form de connexion">
             <h1>Connexion</h1>
             <form method="post" action="action=home">
                 <div>

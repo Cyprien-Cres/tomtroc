@@ -1,6 +1,6 @@
 <section class="register_container">
     <div class="register">
-        <div class="div_form">
+        <div class="div_form" role="form" aria-label="Formulaire d'inscription">
             <h1>Inscription</h1>
             <form method="post" action="action=books">
                 <div>

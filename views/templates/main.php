@@ -21,45 +21,46 @@
 <header role="banner">
     <img src="img/header/logo_tomtroc.png" class="logo" alt="Logo de Tomtroc">
     <nav role="navigation" aria-label="Main navigation">
-        <ul class="nav-left">
+        <ul class="nav-left" aria-label="Navigation principale">
             <li>
-                <a href="./index.php?action=home">
+                <a role="link" aria-label="Lien page d'accueil" href="./index.php?action=home">
                     <p class="<?= (!isset($_GET['action']) || $_GET['action'] === 'home') ? 'active' : '' ?>">Accueil</p>
                 </a>
             </li>
             <li>
-                <a href="./index.php?action=books">
+                <a role="link" aria-label="Lien page des livres à l'échange" href="./index.php?action=books">
                     <p class="<?= isset($_GET['action']) && $_GET['action'] === 'books' ? 'active' : '' ?>">Nos livres à l'échange</p>
                 </a>
             </li>
         </ul>
-        <ul class="nav-right">
+        <ul class="nav-right" aria-label="Navigation utilisateur">
             <?php if (isset($_SESSION['user'])): ?>
                 <li>
-                    <a href="./index.php?action=messaging&userRecipient=<?= isset($_SESSION['lastConversationUserId']) ? '&userRecipient=' . $_SESSION['lastConversationUserId'] : '' ?>">
-                        <?php if ($_GET['action'] === 'messaging'): ?>
-                        <img src="img/header/icon_messenger_bold.svg" class="icon">
+                    <a role="link" aria-label="Lien Messagerie" href="./index.php?action=messaging&userRecipient=<?= isset($_SESSION['lastConversationUserId']) ? '&userRecipient=' . $_SESSION['lastConversationUserId'] : '' ?>">
+                        <?php if (isset($_GET['action']) && $_GET['action'] === 'messaging'): ?>
+                        <img src="img/header/icon_messenger_bold.svg" class="icon" alt="Messagerie (active)" aria-hidden="true">
                         <?php else: ?>
-                        <img src="img/header/icon_messenger.svg" class="icon">
+                        <img src="img/header/icon_messenger.svg" class="icon" alt="Messagerie" aria-hidden="true">
                         <?php endif; ?>
-                        <p class="<?= $_GET['action'] === 'messaging' ? 'active' : '' ?>">Messagerie</p>
-                        <p class="<?php echo (isset($_SESSION['unreadCounter']) && $_SESSION['unreadCounter'] > 0) ? 'notif_number' : 'all_read'?>"><?php echo $_SESSION['unreadCounter']?></p>
+                        <p class="<?= isset($_GET['action']) && $_GET['action'] === 'messaging' ? 'active' : '' ?>">Messagerie</p>
+                        <p role="status" aria-label="<?= $_SESSION['unreadCounter'] ?? 0 ?> messages non lus"
+                           class="<?php echo (isset($_SESSION['unreadCounter']) && $_SESSION['unreadCounter'] > 0) ? 'notif_number' : 'all_read'?>"><?php echo $_SESSION['unreadCounter']?></p>
                     </a>
                 </li>
                 <li>
-                    <a href="./index.php?action=account">
-                        <img src="img/header/icon_account.svg" class="icon">
-                        <p class="<?= $_GET['action'] === 'account' ? 'active' : '' ?>">Mon Compte</p>
+                    <a role="link" aria-label="Lien page compte utilisateur" href="./index.php?action=account">
+                        <img src="img/header/icon_account.svg" class="icon" alt="Mon compte" aria-hidden="true">
+                        <p class="<?= isset($_GET['action']) && $_GET['action'] === 'account' ? 'active' : '' ?>">Mon Compte</p>
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?action=logout">
+                    <a role="link" aria-label="Lien de déconnexion" href="index.php?action=logout">
                         <p>Déconnexion</p>
                     </a>
                 </li>
             <?php else: ?>
             <li>
-                <a href="./index.php?action=register">
+                <a role="link" aria-label="Lien pour s'inscrire ou se connecter" href="./index.php?action=register">
                     <p class="<?= isset($_GET['action']) && $_GET['action'] === 'register'
                     || isset($_GET['action']) && $_GET['action'] === 'login' ? 'active' : '' ?>">Connexion</p>
                 </a>
@@ -90,7 +91,7 @@
                 <p>Tom Troc©</p>
             </li>
             <li>
-                <img src="img/footer/icon_footer.svg" class="icon_footer">
+                <img src="img/footer/icon_footer.svg" class="icon_footer" alt="Icône Tom Troc">
             </li>
         </ul>
     </nav>

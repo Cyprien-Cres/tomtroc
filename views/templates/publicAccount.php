@@ -5,7 +5,7 @@
 ?>
 <section class="public_account">
     <div class="account_detail">
-        <div class="account_info">
+        <div class="account_info" role="contentinfo" aria-label="Info compte utilisateur">
             <img class="user_img"
                  src="img/users/<?php echo htmlspecialchars($user->getUserImg())?>"
                  alt="Icône utilisateur">
@@ -30,16 +30,17 @@
             </p>
             <p class="mini_title">BIBLIOTHEQUE</p>
             <p class="book_number">
-                <img src="img/account/book_logo.svg">
+                <img aria-hidden="true" src="img/account/book_logo.svg" alt="Logo livre">
                 <?php echo count($books) ?? 0;?>
                 livre<?php echo (count($books) > 1) ? 's' : ''; ?>
             </p>
-            <a href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">
+            <a role="link" aria-label="Lien vers la page de connection ou la messagerie"
+               href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">
                 <button type="submit" class="button_account_form public_account_button">Écrire un message</button>
             </a>
         </div>
     </div>
-    <div class="public_account_books">
+    <div class="public_account_books" role="table" aria-label="liste des livres de l'utilisateur">
         <table class="table_public_account_books">
             <thead>
             <tr class="radius_top">
@@ -52,10 +53,12 @@
             <tbody>
             <?php foreach ($books as $book): ?>
                 <tr class="table_row radius_bottom">
-                    <th class="th_img"><img src="img/books/<?php echo htmlspecialchars($book->getPhoto()); ?>" alt="Couverture du livre <?php echo $book->getTitle(); ?>"></th>
-                    <th class="th_row change_weight"><?php echo htmlspecialchars($book->getTitle()); ?></th>
-                    <th class="th_row change_weight"><?php echo htmlspecialchars($book->getAuthor()); ?></th>
-                    <th class="description_truncate th_row change_weight"><?php echo htmlspecialchars($book->getDescription()); ?></th>
+                    <td class="th_img">
+                        <img aria-hidden="true" src="img/books/<?php echo htmlspecialchars($book->getPhoto()); ?>" alt="Couverture du livre <?php echo $book->getTitle(); ?>">
+                    </td>
+                    <td class="th_row change_weight"><?php echo htmlspecialchars($book->getTitle()); ?></td>
+                    <td class="th_row change_weight"><?php echo htmlspecialchars($book->getAuthor()); ?></td>
+                    <td class="description_truncate th_row change_weight"><?php echo htmlspecialchars($book->getDescription()); ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

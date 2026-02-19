@@ -1,10 +1,12 @@
 <section class="edit_page">
-    <a class="edit_link" href="./index.php?action=account">
-        <img src="img/edit/arrow_left_icon.svg">
-        <p>retour</p>
-    </a>
-    <h1>Modifier les informations</h1>
-    <form class="edit_form" method="post" enctype="multipart/form-data">
+    <div class="edit_header">
+        <a class="edit_link" href="./index.php?action=account">
+            <img alt="Logo flêche gauche" src="img/edit/arrow_left_icon.svg">
+            <p>retour</p>
+        </a>
+        <h1>Modifier les informations</h1>
+    </div>
+    <form role="form" aria-label="Éditer un livre" class="edit_form" method="post" enctype="multipart/form-data">
         <div class="edit_photo">
             <h2>Photo</h2>
             <img class="edit_photo_img" src="img/books/<?php echo htmlspecialchars($book->getPhoto());?>" alt="Photo du livre">

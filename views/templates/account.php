@@ -6,7 +6,7 @@
 <section class="account">
     <h1>Mon compte</h1>
     <div class="account_detail">
-        <form method="post" enctype="multipart/form-data">
+        <form role="form" aria-label="Modifier utilisateur" method="post" enctype="multipart/form-data">
             <div class="account_info">
                 <img class="user_img"
                      src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>"
@@ -36,7 +36,7 @@
                 </p>
                 <p class="mini_title">BIBLIOTHEQUE</p>
                 <p class="book_number">
-                    <img src="img/account/book_logo.svg">
+                    <img aria-hidden="true" src="img/account/book_logo.svg" alt="Logo de livre">
                     <?php echo count($books) ?? 0;?>
                     livre<?php echo (count($books) > 1) ? 's' : ''; ?>
                 </p>
