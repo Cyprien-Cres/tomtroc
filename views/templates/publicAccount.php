@@ -29,11 +29,13 @@
                 ?>
             </p>
             <p class="mini_title">BIBLIOTHEQUE</p>
-            <p class="book_number">
-                <img aria-hidden="true" src="img/account/book_logo.svg" alt="Logo livre">
-                <?php echo count($books) ?? 0;?>
-                livre<?php echo (count($books) > 1) ? 's' : ''; ?>
-            </p>
+            <div class="book_number">
+                <img aria-hidden="true" src="img/account/book_logo.svg" alt="Logo de livre">
+                <p>
+                    <?php echo count($books) ?? 0;?>
+                    livre<?php echo (count($books) > 1) ? 's' : ''; ?>
+                </p>
+            </div>
             <a role="link" aria-label="Lien vers la page de connection ou la messagerie"
                class="button_account_form public_account_button"
                href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">

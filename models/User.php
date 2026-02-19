@@ -8,7 +8,7 @@ class User extends AbstractEntity
     private string $login;
     private string $password;
     private string $nickname;
-    private string $user_img;
+    private ?string $user_img = null;
     private string $date;
 
     /**
@@ -56,12 +56,12 @@ class User extends AbstractEntity
         return $this->password;
     }
 
-    public function setUserImg (string $user_img) : void
+    public function setUserImg(?string $user_img) : void
     {
         $this->user_img = $user_img;
     }
 
-    public function getUserImg() : string
+    public function getUserImg() : ?string
     {
         return $this->user_img;
     }

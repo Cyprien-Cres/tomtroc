@@ -4,7 +4,7 @@ class UserManager extends AbstractEntityManager
     public function updateUser(User $user) : ?User
     {
         // Construire la requête en fonction de la présence d'un nouveau mot de passe
-        if (!empty($_POST['password']) && $_POST['password'] !== 'password') {
+        if (!empty($_POST['password']) && $_POST['password'] !== '********') {
             $sql = "UPDATE users SET login = :login, password = :password, nickname = :nickname, user_img = :user_img WHERE id = :id";
             $result = $this->db->query($sql, [
                 ':login' => $_POST['login'],

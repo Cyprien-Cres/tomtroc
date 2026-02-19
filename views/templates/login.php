@@ -7,11 +7,11 @@
             <form method="post" action="action=home">
                 <div>
                     <label for="login">Adresse email</label>
-                    <input type="email" id="login" name="login">
+                    <input type="email" id="login" name="login" required>
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password">
+                    <input type="password" id="password" name="password" required>
                 </div>
 
                 <input type="hidden" name="action" value="connectUser">

@@ -36,7 +36,7 @@
             <div class="conversation_messages">
                 <?php if (!empty($conversationDetail)): ?>
                     <?php foreach ($conversationDetail as $message): ?>
-                        <div class="<?php echo ($message->getUserSender() == $selectedConversation->getUserSender()) ? 'received' : 'sent'; ?>">
+                        <div class="<?php echo ($message->getUserSender() == $_SESSION['user']->getId()) ? 'sent' : 'received'; ?>">
                             <div class="received_details">
                                 <img src="img/users/<?php echo $message->getUserImg() ?>" alt="Avatar de l'utilisateur">
                                 <p class="message_time"><?php echo date('m/d H:i', strtotime($message->getCreatedAt())); ?></p>

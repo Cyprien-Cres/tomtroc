@@ -35,11 +35,13 @@
                     ?>
                 </p>
                 <p class="mini_title">BIBLIOTHEQUE</p>
-                <p class="book_number">
+                <div class="book_number">
                     <img aria-hidden="true" src="img/account/book_logo.svg" alt="Logo de livre">
-                    <?php echo count($books) ?? 0;?>
-                    livre<?php echo (count($books) > 1) ? 's' : ''; ?>
-                </p>
+                    <p>
+                        <?php echo count($books) ?? 0;?>
+                        livre<?php echo (count($books) > 1) ? 's' : ''; ?>
+                    </p>
+                </div>
             </div>
             <div class="account_form div_form">
                 <h2>Vos informations personnelles</h2>
@@ -49,7 +51,7 @@
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" value="password" required>
+                    <input type="password" id="password" name="password" value="********" required>
                 </div>
                 <div>
                     <label for="nickname">Pseudo</label>
