@@ -27,6 +27,13 @@ class View
      */
     public function render(string $viewName, array $params = []) : void
     {
+        // Récupérer le dernier utilisateur de conversation si connecté
+        if (isset($_SESSION['user'])) {
+            $messagingManager = new MessagingManager();
+            $_SESSION['lastConversationUserId'] = $messagingManager->getLastConversationUserId($_SESSION['user']->getId());
+            $_SESSION['unreadCounter'] = $messagingManager->countUnreadMessages($_SESSION['user']->getId());
+        }
+
         // On s'occupe de la vue envoyée
         $viewPath = $this->buildViewPath($viewName);
 

@@ -31,7 +31,7 @@ class DBManager
      * Méthode qui permet de récupérer l'instance de la classe DBManager.
      * @return DBManager
      */
-    public static function getInstance() : DBManager
+    public static function getInstance(): DBManager
     {
         if (!self::$instance) {
             self::$instance = new DBManager();
@@ -43,7 +43,7 @@ class DBManager
      * Méthode qui permet de récupérer l'objet PDO qui permet de se connecter à la base de données.
      * @return PDO
      */
-    public function getPDO() : PDO
+    public function getPDO(): PDO
     {
         return $this->db;
     }
@@ -55,7 +55,7 @@ class DBManager
      * @param array|null $params : les paramètres de la requête SQL.
      * @return PDOStatement : le résultat de la requête SQL.
      */
-    public function query(string $sql, ?array $params = null) : PDOStatement
+    public function query(string $sql, ?array $params = null): PDOStatement
     {
         if ($params == null) {
             $query = $this->db->query($sql);
@@ -65,5 +65,4 @@ class DBManager
         }
         return $query;
     }
-
 }

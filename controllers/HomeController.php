@@ -8,10 +8,10 @@ class HomeController
      */
     public function showHome() : void
     {
-        $userManager = new UserManager();
-        $users = $userManager->getAllUsers();
+        $booksManager = new BooksManager();
+        $books = $booksManager->getAllBooksForHome();
 
-        $view = new View("Accueil");
-        $view->render("home", ['users' => $users]);
+        $view = new View("Accueil - Tom Troc");
+        $view->render("home", ['books' => $books ]);
     }
 }

@@ -8,6 +8,8 @@ class User extends AbstractEntity
     private string $login;
     private string $password;
     private string $nickname;
+    private ?string $user_img = null;
+    private string $date;
 
     /**
      * Setter pour le login.
@@ -45,7 +47,6 @@ class User extends AbstractEntity
     {
         $this->password = $password;
     }
-
     /**
      * Getter pour le password.
      * @return string
@@ -53,5 +54,25 @@ class User extends AbstractEntity
     public function getPassword() : string
     {
         return $this->password;
+    }
+
+    public function setUserImg(?string $user_img) : void
+    {
+        $this->user_img = $user_img;
+    }
+
+    public function getUserImg() : ?string
+    {
+        return $this->user_img;
+    }
+
+    public function setDate(string $date) : void
+    {
+        $this->date = $date;
+    }
+
+    public function getDate() : string
+    {
+        return $this->date;
     }
 }
