@@ -3,8 +3,17 @@
 require_once 'config/autoload.php';
 require_once 'config/config.php';
 
-// On récupère l'action demandée par l'utilisateur.
 $action = Utils::request('action', 'home');
+
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+if ($uri !== '' && $uri !== '/' && $uri !== '/index.php') {
+    if (is_file(__DIR__ . $uri)) {
+        return false;
+    }
+    $errorView = new View('Erreur');
+    $errorView->render('errorPage', ['errorMessage' => "La page demandée n'existe pas."]);
+    exit;
+}
 
 // Try catch global pour gérer les erreurs
 try {
