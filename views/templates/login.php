@@ -4,7 +4,7 @@
     <div class="register">
         <div class="div_form" role="form" aria-label="Form de connexion">
             <h1>Connexion</h1>
-            <form method="post" action="action=home">
+            <form method="post" action="./index.php?action=books">
                 <div>
                     <label for="login">Adresse email</label>
                     <input type="email" id="login" name="login" required>
