@@ -2,7 +2,7 @@
     <div class="register">
         <div class="div_form" role="form" aria-label="Formulaire d'inscription">
             <h1>Inscription</h1>
-            <form method="post" action="action=books">
+            <form method="post" action="./index.php?action=books">
                 <div>
                     <label for="nickname">Pseudo</label>
                     <input type="text" id="nickname" name="nickname" required>
