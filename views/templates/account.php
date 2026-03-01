@@ -8,9 +8,11 @@
     <div class="account_detail">
         <form role="form" aria-label="Modifier utilisateur" method="post" enctype="multipart/form-data">
             <div class="account_info">
-                <img class="user_img"
-                     src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>"
-                     alt="Icône utilisateur">
+                <?php if (empty($_SESSION['user']->getUserImg())) : ?>
+                    <img class="user_img_default" src="img/add/add_img_logo.svg" alt="Aucune photo disponible">
+                <?php else : ?>
+                    <img class="user_img" src="img/users/<?php echo htmlspecialchars($_SESSION['user']->getUserImg())?>" alt="Icône utilisateur">
+                <?php endif; ?>
                 <div class="account_link">
                     <label for="fileToUpload">Modifier</label>
                     <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">

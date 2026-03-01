@@ -855,6 +855,20 @@ main {
     border-radius: 20px;
 }
 
+.account_info .user_img_default {
+    height: 135px;
+    width: 135px;
+    border-radius: 100%;
+    margin-top: 46px;
+    margin-bottom: 7px;
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    object-fit: cover;
+}
+
+
 .account_info .user_img {
     height: 135px;
     width: 135px;

@@ -12,7 +12,7 @@
             <?php if (empty($book->getPhoto())) : ?>
                 <img class="edit_photo_img" src="img/add/add_img_logo.svg" alt="Aucune photo disponible">
             <?php else : ?>
-            <img class="edit_photo_img" src="img/books/<?php echo htmlspecialchars($book->getPhoto());?>" alt="Photo du livre">
+                <img class="edit_photo_img" src="img/books/<?php echo htmlspecialchars($book->getPhoto());?>" alt="Photo du livre">
             <?php endif; ?>
             <p id="file-error" class="error_message hidden" role="alert"></p>
             <label class="edit_photo_label" for="fileToUpload">Modifier la photo</label>
