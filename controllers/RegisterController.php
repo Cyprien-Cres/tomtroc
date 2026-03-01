@@ -8,8 +8,47 @@ class RegisterController
      */
     public function showRegister() : void
     {
+        $errors = "";
+        $errorNickname = "";
+        $errorLogin = "";
+        $errorPassword = "";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $nickname = Utils::request("nickname");
+            $login = Utils::request("login");
+            $password = Utils::request("password");
+
+            if (empty($nickname)) {
+                $errorNickname = "Le pseudo est requis.";
+            }
+            if (empty($login)) {
+                $errorLogin = "L'identifiant est requis.";
+            }
+            if (empty($password)) {
+                $errorPassword = "Le mot de passe est requis.";
+            }
+
+            if (empty($errorNickname) && empty($errorLogin) && empty($errorPassword)) {
+                try {
+                    $this->addNewUser($nickname, $login, $password);
+
+                    Utils::redirect("login");
+                    return;
+                } catch (Exception $e) {
+                    $errors = $e->getMessage();
+                }
+            }
+        }
+
         $view = new View("Inscription - Tom Troc");
-        $view->render("register");
+
+        $view->render("register", [
+            'errors' => $errors,
+            'errorNickname' => $errorNickname,
+            'errorLogin' => $errorLogin,
+            'errorPassword' => $errorPassword
+        ]);
     }
 
     /**
@@ -17,36 +56,21 @@ class RegisterController
      * @return void
      * @throws Exception
      */
-    public function addNewUser() : void
+    public function addNewUser(string $nickname, string $login, string $password) : void
     {
-        // Récupération des données du formulaire.
-        $nickname = Utils::request("nickname");
-        $login = Utils::request("login");
-        $password = Utils::request("password");
-
-        // On vérifie que les données sont valides.
-        if (empty($nickname) || empty($login) || empty($password)) {
-            throw new Exception("Tous les champs sont obligatoires.");
-        }
-
-        //Hashage du mot de passe
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // On crée l'objet User.
         $newUser = new Register([
             'nickname' => $nickname,
             'login' => $login,
             'password' => $hashedPassword
         ]);
 
-        // On vérifie que l'article existe.
         $registerManager = new RegisterManager();
-        $newUser = $registerManager->addNewUser($newUser);
-        if (!$newUser) {
+        $result = $registerManager->addNewUser($newUser);
+
+        if (!$result) {
             throw new Exception("Une erreur est survenue lors de l'inscription.");
         }
-
-        // On redirige vers la page de Home.
-        Utils::redirect("home");
     }
 }

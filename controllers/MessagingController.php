@@ -40,6 +40,18 @@ class MessagingController
             $_SESSION['unreadCounter'] = $messagingManager->countUnreadMessages($currentUserId);
         }
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $user_recipient = Utils::request("userRecipient");
+            $content = Utils::request("content");
+            $user_sender = $_SESSION['user']->getId();
+
+            $this->sendMessage($user_recipient, $content, $user_sender);
+
+            Utils::redirect("messaging&userRecipient=$user_recipient");
+            return;
+        }
+
         $view = new View("Messagerie - Tom Troc");
         $view->render("messaging" , ['conversations' => $conversations]
             + ['conversationDetail' => $conversationDetail]
@@ -47,12 +59,8 @@ class MessagingController
             + ['lastConversationUserId' => $lastConversationUserId]);
     }
 
-    public function sendMessage()
+    public function sendMessage(int $user_recipient, string $content, int $user_sender)
     {
-        // userSender dans l'URL est en fait le destinataire
-        $user_recipient = $_GET['userRecipient'];
-        $content = $_POST['content'];
-        $user_sender = $_SESSION['user']->getId();
 
         $messaging = new Messaging([
             'user_recipient' => $user_recipient,
@@ -62,9 +70,5 @@ class MessagingController
 
         $messagingManager = new MessagingManager();
         $messagingManager->sendMessage($messaging);
-
-        $messagingManager->getAllConversation($user_sender);
-
-        Utils::redirect("messaging&userRecipient=$user_recipient");
     }
 }

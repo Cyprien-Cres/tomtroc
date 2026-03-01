@@ -48,12 +48,30 @@
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            <form method="POST" class="message_form" role="form" aria-label="Envoi de message">
+            <p id="message_error" class="error_message hidden">Veuillez écrire un message avant d'envoyer.</p>
+            <form method="post" class="message_form" role="form" aria-label="Envoi de message"
+                  onsubmit="return validateMessage()">
                 <label class="hidden_label" for="send_message">Message</label>
                 <textarea id="send_message" name="content" placeholder="Tapez votre message ici"></textarea>
-                <input type="hidden" name="action" value="sendMessage">
                 <button type="submit">Envoyer</button>
             </form>
         </div>
     <?php endif; ?>
 </section>
+
+<script>
+    function validateMessage() {
+        const textarea = document.getElementById('send_message');
+        const error = document.getElementById('message_error');
+
+        if (textarea.value.trim() === '') {
+            textarea.style.border = '2px solid red';
+            error.style.display = 'block';
+            return false;
+        }
+
+        textarea.style.border = '';
+        error.style.display = 'hidden';
+        return true;
+    }
+</script>

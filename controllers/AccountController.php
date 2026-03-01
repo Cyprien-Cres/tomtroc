@@ -10,50 +10,59 @@ class AccountController
         $this->checkIfUserIsConnected();
 
         $id = $_SESSION['user']->getId();
+        $errors = "";
+        $errorNickname = "";
+        $errorLogin = "";
+        $login = "";
+        $password = "";
+        $nickname = "";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $nickname = Utils::request("nickname");
+            $login = Utils::request("login");
+            $password = Utils::request("password");
+
+            if (empty($nickname)) {
+                $errorNickname = "Le pseudo est requis.";
+            }
+            if (empty($login)) {
+                $errorLogin = "L'identifiant est requis.";
+            }
+
+            if (empty($errorNickname) && empty($errorLogin) && empty($errorPassword)) {
+                try {
+                    $this->updateUser($id, $login, $password, $nickname);
+
+                    Utils::redirect("account");
+                    return;
+                } catch (Exception $e) {
+                    $errors = $e->getMessage();
+                }
+            }
+        }
 
         $booksManager = new BooksManager();
         $books = $booksManager->getAllBooksForAccount($id);
 
         $view = new View("Mon Compte - Tom Troc");
-        $view->render("account", ['books' => $books]);
+        $view->render("account", [
+            'books' => $books,
+            'id' => $id,
+            'errors' => $errors,
+            'errorNickname' => $errorNickname,
+            'errorLogin' => $errorLogin,
+            'login' => $login,
+            'password' => $password,
+            'nickname' => $nickname,
+        ]);
     }
 
-    public function showAccountPublic() : void
+    public function updateUser(int $id, string $login, string $password, string $nickname) : void
     {
-        $id = Utils::request("idUser", -1);
-
-        $accountManager = new AccountManager();
-        $user = $accountManager->getUserById($id);
-
-        $booksManager = new BooksManager();
-        $books = $booksManager->getAllBooksForAccount($id);
-
-        $nickname = $user->getNickname();
-
-        $view = new View("Compte $nickname - Tom Troc");
-        $view->render("publicAccount", ['books' => $books] + ['user' => $user]);
-
-    }
-
-    private function checkIfUserIsConnected() : void
-    {
-        // On vérifie que l'utilisateur est connecté.
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("home");
-        }
-    }
-
-    public function updateUser() : void
-    {
-        $user_id = $_SESSION['user']->getId();
-        $login = Utils::request("login");
-        $password = Utils::request("password");
-        $nickname = Utils::request("nickname");
-        $newFileName = null;
-
         // Récupérer l'ancienne photo avant mise à jour
         $accountManager = new AccountManager();
-        $currentUser = $accountManager->getUserById($user_id);
+        $currentUser = $accountManager->getUserById($id);
         $oldPhoto = $currentUser->getUserImg();
 
         if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
@@ -86,7 +95,7 @@ class AccountController
         }
 
         $user = new User([
-            'id' => $user_id,
+            'id' => $id,
             'login' => $login,
             'password' => $password,
             'nickname' => $nickname,
@@ -98,8 +107,32 @@ class AccountController
         $userManager->updateUser($user);
 
         $_SESSION['user'] = $user;
+    }
 
-        Utils::redirect("account");
+
+    public function showAccountPublic() : void
+    {
+        $id = Utils::request("idUser", -1);
+
+        $accountManager = new AccountManager();
+        $user = $accountManager->getUserById($id);
+
+        $booksManager = new BooksManager();
+        $books = $booksManager->getAllBooksForAccount($id);
+
+        $nickname = $user->getNickname();
+
+        $view = new View("Compte $nickname - Tom Troc");
+        $view->render("publicAccount", ['books' => $books] + ['user' => $user]);
+
+    }
+
+    private function checkIfUserIsConnected() : void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        if (!isset($_SESSION['user'])) {
+            Utils::redirect("home");
+        }
     }
 }
 

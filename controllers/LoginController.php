@@ -4,49 +4,52 @@ class LoginController
 {
     public function showLogin() : void
     {
-        $view = new View("Connexion - Tom Troc");
-        $view->render("login");
-    }
+        $errors = "";
+        $errorLogin = "";
+        $errorPassword = "";
 
-    public function connectUser() : void
-    {
-        // On récupère les données du formulaire.
-        $login = Utils::request("login");
-        $password = Utils::request("password");
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $login = Utils::request("login");
+            $password = Utils::request("password");
 
-        // On vérifie que les données sont valides.
-        if (empty($login) || empty($password)) {
-            throw new Exception("Tous les champs sont obligatoires. 1");
+            if (empty($login)) {
+                $errorLogin = "L'identifiant est requis.";
+            }
+            if (empty($password)) {
+                $errorPassword = "Le mot de passe est requis.";
+            }
+
+            if (empty($errorLogin) && empty($errorPassword)) {
+                try {
+                    $this->connectUser($login, $password);
+                    Utils::redirect("account");
+                    return;
+                } catch (Exception $e) {
+                    $errors = $e->getMessage();
+                }
+            }
         }
 
-        // On vérifie que l'utilisateur existe.
+        $view = new View("Connexion - Tom Troc");
+        $view->render("login", [
+            'errors' => $errors,
+            'errorLogin' => $errorLogin,
+            'errorPassword' => $errorPassword
+        ]);
+    }
+
+    public function connectUser(string $login, string $password) : void
+    {
         $loginManager = new LoginManager();
         $user = $loginManager->getUserByLogin($login);
 
-        if (!$user) {
-            throw new Exception("L'utilisateur demandé n'existe pas.");
+        if (!$user || !password_verify($password, $user->getPassword())) {
+            throw new Exception("L'utilisateur ou le mot de passe est incorrect.");
         }
 
-        // On vérifie que le mot de passe est correct.
-        if (!password_verify($password, $user->getPassword())) {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            throw new Exception("Le mot de passe est incorrect");
-        }
-
-        // On connecte l'utilisateur.
         $_SESSION['user'] = $user;
-
-        // On redirige vers la page home.
-        Utils::redirect("account");
     }
 
-    private function checkIfUserIsConnected() : void
-    {
-        // On vérifie que l'utilisateur est connecté.
-        if (!isset($_SESSION['user'])) {
-            Utils::redirect("connectionForm");
-        }
-    }
 
     public function logout() : void
     {

@@ -47,18 +47,27 @@
                 <h2>Vos informations personnelles</h2>
                 <div>
                     <label for="login">Adresse email</label>
-                    <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['user']->getLogin());?>" required>
+                    <input type="email" id="login" name="login" value="<?php echo htmlspecialchars($_SESSION['user']->getLogin());?>" class="<?php echo !empty($errorLogin) ? 'input_error' : ''; ?>">
+                    <?php if (!empty($errorLogin)) : ?>
+                        <p class="error_message" role="alert">
+                            <?php echo htmlspecialchars($errorLogin); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" value="********" required>
+                    <input type="password" id="password" name="password" placeholder="••••••••">
                 </div>
                 <div>
                     <label for="nickname">Pseudo</label>
-                    <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['user']->getNickname());?>" required>
+                    <input type="text" id="nickname" name="nickname" value="<?php echo htmlspecialchars($_SESSION['user']->getNickname());?>" class="<?php echo !empty($errorNickname) ? 'input_error' : ''; ?>">
+                    <?php if (!empty($errorNickname)) : ?>
+                        <p class="error_message" role="alert">
+                            <?php echo htmlspecialchars($errorNickname); ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <input type="hidden" name="id" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '');?>">
-                <input type="hidden" name="action" value="updateUser">
                 <button type="submit" class="button_account_form">Enregistrer</button>
             </div>
         </form>

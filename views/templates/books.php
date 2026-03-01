@@ -1,7 +1,7 @@
 <section class="books_page">
     <div class="books_header">
         <h1>Nos livres à l'échange</h1>
-        <form role="form" aria-label="Rechercher un livre" method="get" action="filterBooks">
+        <form role="form" aria-label="Rechercher un livre" method="get" action="./index.php?filterBooks">
             <input type="hidden" name="action" value="books" />
             <img src="img/books/search_logo.svg" alt="Icône de recherche" class="search_icon"/>
             <label class="hidden_label"  for="search_input">Rechercher un livre</label>

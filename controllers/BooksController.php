@@ -32,13 +32,70 @@ class BooksController
 
     public function showBook() : void
     {
-        $idBook = Utils::request('idBook', -1);
+        $id = Utils::request("idBook", -1);
 
         $booksManager = new BooksManager();
-        $book = $booksManager->getBookById($idBook);
+        $book = $booksManager->getBookById($id);
+        $oldPhoto = $book->getPhoto();
+
+        $errors = "";
+        $errorTitle = "";
+        $errorAuthor = "";
+        $errorDescription = "";
+        $errorFile = "";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = Utils::request("title");
+            $author = Utils::request("author");
+            $description = Utils::request("description");
+            $available = Utils::request("available");
+            $newFileName = null;
+
+            if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
+                $targetDir = "img/books/";
+                $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+                $newFileName = uniqid() . '.' . $imageFileType;
+                $targetFile = $targetDir . $newFileName;
+
+                if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
+                    if ($oldPhoto && file_exists($targetDir . $oldPhoto)) {
+                        unlink($targetDir . $oldPhoto);
+                    }
+                } else {
+                    $newFileName = null;
+                }
+            }
+
+            if (empty($title)) {
+                $errorTitle = "Le titre est requis.";
+            }
+            if (empty($author)) {
+                $errorAuthor = "L'auteur est requis.";
+            }
+            if (empty($description)) {
+                $errorDescription = "La description est requise.";
+            }
+
+            if (empty($errorTitle) && empty($errorAuthor) && empty($errorDescription) && empty($errorFile)) {
+                try {
+                    $this->updateBook($id, $title, $author, $description, $available, $newFileName, $oldPhoto);
+                    Utils::redirect("account");
+                    return;
+                } catch (Exception $e) {
+                    $errors = $e->getMessage();
+                }
+            }
+        }
 
         $view = new View("Edit - Tom Troc");
-        $view->render("edit", ['book' => $book]);
+        $view->render("edit", [
+            'book' => $book,
+            'errors' => $errors,
+            'errorTitle' => $errorTitle,
+            'errorAuthor' => $errorAuthor,
+            'errorDescription' => $errorDescription,
+            'errorFile' => $errorFile,
+        ]);
     }
 
     public function showBookDetail() : void
@@ -52,49 +109,8 @@ class BooksController
         $view->render("detailBook", ['book' => $book]);
     }
 
-    public function updateBook() : void
+    public function updateBook(int $id, string $title, string $author, string $description, int $available, ?string $newFileName, ?string $oldPhoto) : void
     {
-        $id = Utils::request("idBook", -1);
-        $title = Utils::request("title");
-        $author = Utils::request("author");
-        $description = Utils::request("description");
-        $available = Utils::request("available");
-        $newFileName = null;
-
-        // Récupérer l'ancienne photo avant mise à jour
-        $booksManager = new BooksManager();
-        $oldBook = $booksManager->getBookById($id);
-        $oldPhoto = $oldBook->getPhoto();
-
-        if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
-            $targetDir = "img/books/";
-            $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
-
-            $newFileName = uniqid() . '.' . $imageFileType;
-            $targetFile = $targetDir . $newFileName;
-
-            $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
-            if ($check !== false) {
-                if ($_FILES['fileToUpload']['size'] <= 9000000) {
-                    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-                        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
-                            // Supprimer l'ancienne photo si elle existe
-                            if ($oldPhoto && file_exists($targetDir . $oldPhoto)) {
-                                unlink($targetDir . $oldPhoto);
-                            }} else {
-                            $newFileName = null;
-                        }
-                    } else {
-                        $newFileName = null;
-                    }
-                } else {
-                    $newFileName = null;
-                }
-            } else {
-                $newFileName = null;
-            }
-        }
-
         $book = new Books([
             'id' => $id,
             'title' => $title,
@@ -104,55 +120,70 @@ class BooksController
             'photo' => $newFileName ?? $oldPhoto
         ]);
 
+        $booksManager = new BooksManager();
         $booksManager->updateBook($book);
-        Utils::redirect("account");
     }
 
 
     public function showAddBook() : void
     {
-        // On redirige vers la page d'administration.
-        $view = new View("Ajouter un livre");
-        $view->render("addBook");
-    }
+        $errors = "";
+        $errorTitle = "";
+        $errorAuthor = "";
+        $errorDescription = "";
+        $errorFile = "";
 
-    public function addBook() : void
-    {
-        $title = Utils::request("title");
-        $author = Utils::request("author");
-        $description = Utils::request("description");
-        $available = Utils::request("available");
-        $uploadedFile = null;
-        $newFileName = null; // Initialisé à null
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = Utils::request("title");
+            $author = Utils::request("author");
+            $description = Utils::request("description");
+            $available = Utils::request("available");
+            $newFileName = null;
 
-        if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
-            $targetDir = "img/books/";
-            $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+            if (isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] === 0) {
+                $targetDir = "img/books/";
+                $imageFileType = strtolower(pathinfo($_FILES['fileToUpload']['name'], PATHINFO_EXTENSION));
+                $newFileName = uniqid() . '.' . $imageFileType;
+                $targetFile = $targetDir . $newFileName;
 
-            // Générer le nom UNE SEULE FOIS ici
-            $newFileName = uniqid() . '.' . $imageFileType;
-            $targetFile = $targetDir . $newFileName;
-
-            $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
-            if ($check !== false) {
-                if ($_FILES['fileToUpload']['size'] <= 9000000) {
-                    if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
-                        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
-                            $uploadedFile = $targetFile;
-                        } else {
-                            $newFileName = null;
-                        }
-                    } else {
-                        $newFileName = null;
-                    }
-                } else {
+                if (!move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $targetFile)) {
                     $newFileName = null;
                 }
-            } else {
-                $newFileName = null;
+            }
+
+            if (empty($title)) {
+                $errorTitle = "Le titre est requis.";
+            }
+            if (empty($author)) {
+                $errorAuthor = "L'auteur est requis.";
+            }
+            if (empty($description)) {
+                $errorDescription = "La description est requise.";
+            }
+
+            if (empty($errorTitle) && empty($errorAuthor) && empty($errorDescription) && empty($errorFile)) {
+                try {
+                    $this->addBook($title, $author, $description, $available, $newFileName);
+                    Utils::redirect("account");
+                    return;
+                } catch (Exception $e) {
+                    $errors = $e->getMessage();
+                }
             }
         }
 
+        $view = new View("Ajouter un livre");
+        $view->render("addBook", [
+            'errors'           => $errors,
+            'errorTitle'       => $errorTitle,
+            'errorAuthor'      => $errorAuthor,
+            'errorDescription' => $errorDescription,
+            'errorFile'    => $errorFile,
+        ]);
+    }
+
+    public function addBook(string $title, string $author, string $description, int $available, ?string $newFileName) : void
+    {
         $book = new Books([
             'title' => $title,
             'author' => $author,
@@ -164,13 +195,11 @@ class BooksController
 
         $bookManager = new BooksManager();
         $bookManager->addBook($book);
-
-        Utils::redirect("account");
     }
 
     public function deleteBook() : void
     {
-        $id = (int)($_GET['idBook'] ?? 0);
+        $id = Utils::request("idBook", -1);
 
         $bookManager = new BooksManager();
 

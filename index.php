@@ -6,10 +6,19 @@ require_once 'config/config.php';
 $action = Utils::request('action', 'home');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
 if ($uri !== '' && $uri !== '/' && $uri !== '/index.php') {
     if (is_file(__DIR__ . $uri)) {
         return false;
     }
+}
+
+$isIndex = in_array($uri, ['', '/', '/index.php']);
+
+$hasQueryString = !empty($_SERVER['QUERY_STRING']);
+$hasAction = isset($_GET['action']);
+
+if (!$isIndex || ($hasQueryString && !$hasAction)) {
     $errorView = new View('Erreur');
     $errorView->render('errorPage', ['errorMessage' => "La page demandée n'existe pas."]);
     exit;
@@ -36,17 +45,9 @@ try {
             $registerController = new RegisterController();
             $registerController->showRegister();
             break;
-        case 'addNewUser':
-            $registerController = new RegisterController();
-            $registerController->addNewUser();
-            break;
         case 'login':
             $loginController = new LoginController();
             $loginController->showLogin();
-            break;
-        case 'connectUser':
-            $loginController = new LoginController();
-            $loginController->connectUser();
             break;
         case 'logout':
             $loginController = new LoginController();
@@ -72,17 +73,9 @@ try {
             $booksController = new BooksController();
             $booksController->showBook();
             break;
-        case 'updateBook':
-            $booksController = new BooksController();
-            $booksController->updateBook();
-            break;
         case 'showAddBook':
             $booksController = new BooksController();
             $booksController->showAddBook();
-            break;
-        case 'addBook':
-            $booksController = new BooksController();
-            $booksController->addBook();
             break;
         case 'delete':
             $booksController = new BooksController();
@@ -91,10 +84,6 @@ try {
         case 'messaging':
             $messagingController = new MessagingController();
             $messagingController->showMessaging();
-            break;
-        case 'sendMessage':
-            $messagingController = new MessagingController();
-            $messagingController->sendMessage();
             break;
         default:
             throw new Exception("La page demandée n'existe pas.");
