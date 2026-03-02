@@ -38,7 +38,7 @@
             </div>
             <a role="link" aria-label="Lien vers la page de connection ou la messagerie"
                class="button_account_form public_account_button"
-               href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">
+               href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userRecipient=<?php echo htmlspecialchars($user->getId());?>">
                 Écrire un message
             </a>
         </div>

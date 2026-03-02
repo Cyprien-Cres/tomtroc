@@ -8,7 +8,7 @@ class Messaging extends AbstractEntity
     private string $content;
     private string $created_at;
     private string $nickname;
-    private string $user_img;
+    private ?string $user_img;
 
     public function setUserSender(int $user_sender): void
     {
@@ -61,12 +61,12 @@ class Messaging extends AbstractEntity
         return $this->nickname;
     }
 
-    public function setUserImg(string $user_img): void
+    public function setUserImg(?string $user_img): void
     {
         $this->user_img = $user_img;
     }
 
-    public function getUserImg(): string
+    public function getUserImg(): ?string
     {
         return $this->user_img;
     }

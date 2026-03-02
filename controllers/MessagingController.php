@@ -5,6 +5,7 @@ class MessagingController
     public function showMessaging()
     {
         $id = $_SESSION['user']->getId();
+        $selectedConversation = null;
 
         $messagingManager = new MessagingManager();
         $conversations = $messagingManager->getAllConversation($id);
@@ -26,17 +27,29 @@ class MessagingController
                     break;
                 }
             }
+
+            if ($selectedConversation === null) {
+                $userManager = new UserManager();
+                $recipient = $userManager->getUserById($userRecipientId);
+                if ($recipient) {
+                    $selectedConversation = new Messaging([
+                        'user_sender'    => $userRecipientId,
+                        'user_recipient' => $id,
+                        'nickname'       => $recipient->getNickname(),
+                        'user_img'       => $recipient->getUserImg(),
+                        'content'        => '',
+                        'created_at'     => date('Y-m-d H:i:s'),
+                    ]);
+                }
+            }
         }
 
-        // Quand l'utilisateur ouvre une conversation avec un destinataire
         if (isset($_GET['userRecipient']) && !empty($_GET['userRecipient'])) {
             $userRecipientId = (int) $_GET['userRecipient'];
             $currentUserId = $_SESSION['user']->getId();
 
-            // Marquer les messages de cette conversation comme lus
             $messagingManager->markMessagesAsRead($currentUserId, $userRecipientId);
 
-            // Recalculer le compteur de messages non lus
             $_SESSION['unreadCounter'] = $messagingManager->countUnreadMessages($currentUserId);
         }
 

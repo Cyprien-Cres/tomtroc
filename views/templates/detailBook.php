@@ -14,7 +14,8 @@
                 <img src="img/users/<?php echo htmlspecialchars($book->getUserImg());?>" alt="Photo de l'utilisateur">
                 <p><?php echo htmlspecialchars($book->getNickname());?></p>
             </a>
-            <a class="detail_button" href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userSender=3">
+            <a class="detail_button"
+               href="./index.php?action=<?php echo (isset($_SESSION['user'])) ? 'messaging' : 'register'; ?>&userRecipient=<?php echo htmlspecialchars($book->getUserId());?>">
                 Envoyer un message
             </a>
         </div>
