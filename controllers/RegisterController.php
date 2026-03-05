@@ -29,6 +29,20 @@ class RegisterController
                 $errorPassword = "Le mot de passe est requis.";
             }
 
+            if (empty($errorLogin)) {
+                $registerManager = new RegisterManager();
+                if ($registerManager->isLoginExists($login)) {
+                    $errorLogin = "Cet email est déjà utilisé.";
+                }
+            }
+
+            if (empty($errorNickname)) {
+                $registerManager = new RegisterManager();
+                if ($registerManager->isNicknameExists($nickname)) {
+                    $errorNickname = "Ce pseudo est déjà utilisé.";
+                }
+            }
+
             if (empty($errorNickname) && empty($errorLogin) && empty($errorPassword)) {
                 try {
                     $this->addNewUser($nickname, $login, $password);
@@ -58,6 +72,7 @@ class RegisterController
      */
     public function addNewUser(string $nickname, string $login, string $password) : void
     {
+
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         $newUser = new Register([
